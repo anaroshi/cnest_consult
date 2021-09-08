@@ -1,0 +1,164 @@
+<div class='row mb-3'>
+
+  <div class="col-sm-2">    
+      <input type="text" class="form-control" id="univName" value='{{.Info_1.UnivName}}' readonly>
+  </div>
+
+  <label for="apply_dept_id" class="col-sm-1 col-form-label">모집단위</label>
+  <div class="col-sm-2">
+    <input type="text" class="form-control" id="apply_dept_id" value='{{.Info_1.Apply_dept_id}}' readonly>
+  </div>
+
+  <label for="apply_form" class="col-sm-1 col-form-label">전형구분</label>
+  <div class="col-sm-2">
+    <input type="text" class="form-control" id="apply_form" value='{{.Info_1.Apply_form}}' readonly>
+  </div>
+
+  <label for="apply_formName" class="col-sm-1 col-form-label">전형명칭</label>
+  <div class="col-sm-3">
+    <input type="text" class="form-control" id="apply_formName" value='{{.Info_1.Apply_formName}}' readonly>
+  </div>
+</div>
+
+<hr>
+<h5>[ 전형기본정보 ]</h5>
+
+<div class="row mb-3">
+  <label for="qualiName" class="col-sm-2 col-form-label">지원자격</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="qualiName" value='{{.Info_1.QualiName}}' readonly>
+  </div>
+</div>
+
+<div class='row mb-3'>
+  <label for="recruitName" class="col-sm-2 col-form-label">전형</label>
+  <label for="recruitName" class="col-sm-1 col-form-label">방법</label>
+  <div class="col-sm-2">
+    <input type="text" class="form-control" id="recruitName" value='{{.Info_1.RecruitName}}' readonly>
+  </div>
+  <label for="recruit1st" class="col-sm-1 col-form-label">1단계</label>
+  <div class="col-sm-6">
+    <input type="text" class="form-control" id="recruit1st" value='{{.Info_1.Recruit1st}}' readonly>
+  </div>
+</div>
+<div class='row mb-3'>
+  <label for="recruitName" class="col-sm-2 col-form-label"></label>
+  <label for="recruit1stVol" class="col-sm-1 col-form-label">1단계인원</label>
+  <div class="col-sm-2">
+    <input type="text" class="form-control" id="recruit1stVol" value='{{.Info_1.Recruit1stVol}}' readonly>
+  </div>
+  <label for="recruitFinal" class="col-sm-1 col-form-label">최종</label>
+  <div class="col-sm-6">
+    <input type="text" class="form-control" id="recruitFinal" value='{{.Info_1.RecruitFinal}}' readonly>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <label for="sulimitName" class="col-sm-2 col-form-label">수능최저학력기준</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="sulimitName" value='{{.Info_1.SulimitName}}' readonly>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <label for="docmetName" class="col-sm-2 col-form-label">제출서류</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="docmetName" value='{{.Info_1.DocmetName}}' readonly>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <label for="remarks" class="col-sm-2 col-form-label">비고</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="remarks" value='{{.Info_2.Remarks}}' readonly>
+  </div>
+</div>
+
+<hr>
+<h5>[ 평가방법 ]</h5>
+
+<div class="row mb-3">
+  <label for="nasinmetName" class="col-sm-2 col-form-label">학생부(교과)</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="nasinmetName" value='{{.Info_1.NasinmetName}}' readonly>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="doclstName" class="col-sm-2 col-form-label">서류목록</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="doclstName" value='{{.Info_1.DoclstName}}' readonly>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="intmetName" class="col-sm-2 col-form-label">면접</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="intmetName" value='{{.Info_1.IntmetName}}' readonly>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="nslmetName" class="col-sm-2 col-form-label">논술</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="nslmetName" value='{{.Info_1.NslmetName}}' readonly>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="etcmetName" class="col-sm-2 col-form-label">기타</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="etcmetName" value='{{.Info_1.EtcmetName}}' readonly>
+  </div>
+</div>
+
+<hr>
+<h5>[ 전년도 결과 ]</h5>
+
+<table class="table table-striped table-hover align-middle">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">모집인원</th>
+      <th scope="col">경쟁률</th>
+      <th scope="col">충원인원</th>
+      <th scope="col">내신평균</th>
+      <th scope="col">내신최저</th>
+      <th scope="col">전형평균</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">2022</th>
+      <td>{{.Info_1.Recruit_volume}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">2021</th>
+      <td>{{.N_21.Recruit_volume_2021}}</td>
+      <td>{{.N_21.Compete_ratio_2021}}</td>
+      <td>{{.N_21.Recruit_replace_2021}}</td>
+      <td>{{.N_21.Nasin_mean_2021}}</td>
+      <td>{{.N_21.Nasin_limit_2021}}</td>
+      <td>{{.N_21.Recruit_factor_mean_2021}}</td>
+    </tr>
+    <tr>
+      <th scope="row">2020</th>
+      <td>{{.N_20.Recruit_volume_2020}}</td>
+      <td>{{.N_20.Compete_ratio_2020}}</td>
+      <td>{{.N_20.Recruit_replace_2020}}</td>
+      <td>{{.N_20.Nasin_mean_2020}}</td>
+      <td>{{.N_20.Nasin_limit_2020}}</td>
+      <td>{{.N_20.Recruit_factor_mean_2020}}</td>
+    </tr>
+    <tr>
+      <th scope="row">2019</th>
+      <td>{{.N_19.Recruit_volume_2019}}</td>
+      <td>{{.N_19.Compete_ratio_2019}}</td>
+      <td>{{.N_19.Recruit_replace_2019}}</td>
+      <td>{{.N_19.Nasin_mean_2019}}</td>
+      <td>{{.N_19.Nasin_limit_2019}}</td>
+      <td>{{.N_19.Recruit_factor_mean_2019}}</td>
+    </tr>    
+  </tbody>
+</table>

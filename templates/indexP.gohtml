@@ -1,0 +1,115 @@
+{{template "header" }}
+    <!-- Custom styles for this template -->
+    <link href="css/index.css" rel="stylesheet">
+    <script src="js/index.js"></script>
+    <title>CNEST</title>
+  </head>
+
+  <body>
+  <!-- Modal -->
+    <div class="modal fade" id="univModal" role="dialog">
+      <div class="modal-dialog modal-xl">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">전형 상세 정보</h5>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+          <div class="modal-body">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <span class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fw-semibold">지원가능 대학 조회</span>
+      <div class="input-group" style="width: 400px;">
+        <span class="input-group-text fw-semibold">내 점수</span>
+        <input type="number" class="form-control" id="myValue">        
+        <button type="button" class="btn btn-dark btn_serch_myValue">조회</button>
+      </div>
+      <div class="input-group" style="width: 400px;">
+        <span class="input-group-text fw-semibold">2021 내신 평균</span>
+        <input type="number" class="form-control" id="fAvgValue">
+        <label for="" class="bg-dark" style="width: 30px; text-align: center; color:white;"> ~ </label>
+        <input type="number" class="form-control" id="lAvgValue">
+        <button type="button" class="btn btn-dark btn_serch_avg">조회</button>
+      </div>
+      <div class="d-grid gap-3 d-md-block">
+        <button type="button" class="btn btn-dark btn_clean" href="#">초기화</button>
+        <button type="button" class="btn btn-dark btn_print" disabled>엑셀출력</button>    
+      </div>    
+    </header>
+
+    <main>
+      <aside>
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white" style="width: 400px;">
+         
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li>        
+              <div class="col-10 mb-1 fw-semibold strong">전형구분</div>
+              <div class="col-10 mb-1 small">          
+                <select class="selectpicker applyForm" name="applyForm" size="4" aria-label="size 5"  data-width="370px" multiple title={{.ApplyOpt.OptForm}} data-selected-text-format="count > 3">
+                  {{template "applyFormOptionList"}}
+                </select>
+              </div>  
+            </li>
+            <hr>
+            <li class="nav-item">        
+                <div class="col-10 mb-1 fw-semibold strong">계열구분</div>
+                <div class="col-10 mb-1 small">
+                  <select class="selectpicker applyLine" name="applyLine" aria-label=".form-select-sm"  data-width="370px" title={{.ApplyOpt.OptLine}}>                  
+                  {{template "applyLineOptionList"}}
+                  </select>
+                </div>
+            </li>
+            <hr>
+            <li>        
+              <div class="col-10 mb-1 fw-semibold strong">전공구분</div>
+              <div class="col-10 mb-1 small">          
+                <select class="selectpicker applySubject" name="applySubject" size="5" aria-label="size 5"  data-width="370px"  multiple title={{.ApplyOpt.OptSubject}} data-selected-text-format="count > 3">
+                  {{template "applySubjectOptionList"}}
+                </select>
+              </div>  
+            </li>
+            <hr>
+            <button type="submit" class="btn btn-dark btn_serchDept" href="#">조회</button>
+            <hr>
+            
+            <li>
+              <div class="col-10 mb-1 fw-semibold strong">모집단위</div>
+              <div class="col-10 mb-1 small">            
+                <select class="selectpicker applyDept" data-actions-box="true" name="applyDept" size="25" aria-label="size 25"  data-width="370px" data-live-search="true" multiple title="모집단위를 선택하세요" data-selected-text-format="count > 3" >
+                  {{template "applyDeptOptionList" .}}
+                </select>
+              </div>
+            </li>
+            <hr>
+            <button type="submit" class="btn btn-dark btn_serchUniv" >조회</button>
+            <hr>
+            <div class="dropdown">
+              <a class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="image/logo.png" alt="" width="50" height="20" class="me-2">
+                <strong>Manage</strong>
+              </a>
+              <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+              </ul>
+            </div>
+          </ul>
+        </div>        
+      </aside>
+      <div class="b-example-divider"></div>
+      <section>        
+        {{/* <h2>대학 목록</h2>           */}}
+        <div class="table-responsive justify-content-start univListbydept" id="univListbydept">
+        </div>      
+      </section>
+    </main>
+  </body>
+</html>
+

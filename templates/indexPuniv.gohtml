@@ -1,0 +1,37 @@
+{{/* <h2>대학 목록</h2> */}}
+<div class="table-responsive justify-content-start">
+  <table class="table table-striped table-sm table-hover table align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">NO</th>
+        <th scope="col">대학</th>
+        <th scope="col">전형명칭</th>
+        <th scope="col">모집단위</th>
+        <th scope="col">계열구분</th>
+        <th scope="col">인원</th>
+        <th scope="col">전형방식</th>
+        <th scope="col">1단계</th>
+        <th scope="col">1단계인원</th>
+        <th scope="col">최종</th>
+        <th scope="col">수능최저학력기준</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{range .UnivInfo}}              	
+      <tr>
+        <td class="id" >{{.Id}}</td>
+        <td class="univId" id={{.Id}}>{{.UnivName}}</td>
+        <td class="univForm">{{.Apply_formName}}</td>
+        <td>{{.Apply_dept_id}}</td>
+        <td class="line">{{.Apply_line_id}}</td>
+        <td class="volume">{{.Recruit_volume}}</td>
+        <td>{{.RecruitName}}</td>
+        <td>{{.Recruit1st}}</td>
+        <td class="1stVol">{{.Recruit1stVol}}</td>
+        <td>{{.RecruitFinal}}</td>
+        <td>{{.SulimitName}}</td>
+      </tr>
+    {{end}}
+    </tbody>
+  </table>
+</div>
