@@ -18,8 +18,8 @@ func generateScatterItems(data []float32) []opts.ScatterData {
 		items = append(items, opts.ScatterData{
 			Value:        data[i],
 			Symbol:       "diamond",
-			SymbolSize:   20,
-			SymbolRotate: 10,
+			SymbolSize:   10,
+			SymbolRotate: 0,
 		})
 	}
 	return items
@@ -29,7 +29,7 @@ func scatterShowLabel(SubjNm []string, AvgValue, StdValue []float32) *charts.Sca
 	scatter := charts.NewScatter()
 	scatter.SetGlobalOptions(charts.WithTitleOpts(
 		opts.Title{
-			Title: "label options",
+			Title: "지원 가능 대학 분포도",
 		}),
 		charts.WithXAxisOpts(opts.XAxis{
 			Name: "대학학과",
@@ -38,7 +38,7 @@ func scatterShowLabel(SubjNm []string, AvgValue, StdValue []float32) *charts.Sca
 			},
 		}),
 		charts.WithYAxisOpts(opts.YAxis{
-			Name: "내신평균",
+			Name: "석차등급",
 			SplitLine: &opts.SplitLine{
 				Show: true,
 			}}),

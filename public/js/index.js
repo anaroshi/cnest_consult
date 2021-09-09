@@ -12,20 +12,24 @@ $(document).ready(function () {
     location.href = "/"
   });
 
-  $('.btn_print').on('click', function () {
-    let thisbtn = $('.btn_print');
-    let testHtml = $('div.testHtml');
+  // Print all univ Info only checked checkbox
+  $('.btn_print').on('click', function (e) {
+    e.preventDefault();
+
+    let chk_val = [];
+    $('input[type="checkbox"]:checked').each(function(index) {
+      chk_val.push($(this).val());
+    });
+    alert(chk_val);    
     
     $.ajax({
       type: "POST",
       url: "/happy",
-      data: {},
+      data: { chk_val },
       dataType: "html",
     })
     .done(async function (data) {
-      // Add data in Modal body
-      //thisbtn.remove();
-      testHtml.html(data);
+      
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
       console.log('서버오류: '+ textStatus);
@@ -33,27 +37,21 @@ $(document).ready(function () {
     })
   });
 
-  // $('.btn_print').on('click', function () {
-  //   //$("div.testHtml").html(`<h2>test</h2>`);
-  //   $("div.testHtml").append(`<h2>hello test</h2>`);
-  // });
-
-  
-  // $('.btn_print').on('clack', function(event) {
-  //   event.preventDefault();
-  //   alert("hi")
-  //   $(".test").attr("class");
-  //   $(".test").append(`<h2>hello test</h2>`);
-  // });
   
   /**
    * 대학 List의 대학 선택시
    * 대학에 대한 정보 보여줌
    */
-  $(document).on("click", "tr", function (e) {
-  // $('td.univId').on('click', function (e) {   
+  $(document).on("click", 
+  "td.id, td.univId, td.univForm, td.dept, td.line, td.volume, td.name, td.1st, td.1stVol, td.final, td.sulimit", 
+  function (e) {
+    //$(document).on("click", "tr", function (e) {
+    // $('td.univId').on('click', function (e) {   
     e.preventDefault();
-    var id = $(this).children('.univId').attr('id');
+    
+    var tr = $(this).closest("tr");
+    var id = tr.children('.univId').attr('id');
+    // var id = $(this).children('.univId').attr('id');
     
     if (id != "") {
       $.ajax({
@@ -118,6 +116,7 @@ $(document).ready(function () {
         $('input#lAvgValue').val("");
         $("section.inValSrh").prop("hidden", true);
         $("input#img").prop("hidden", false);
+        $('.btn_print').prop("hidden", true);
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.log('서버오류: '+ textStatus);
@@ -147,6 +146,7 @@ $(document).ready(function () {
         $("input#img").prop("hidden", true);
         $('div.univListbydept').html(data);
         $("section.inValSrh").prop("hidden", false);
+        $('.btn_print').prop("hidden", false);
 
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -170,6 +170,9 @@ $(document).ready(function () {
       alert("모집단위를 선택하세요.");
     } else if (isBlank(myValue)) {
       alert("내 점수를 입력하세요.");
+    } else if (myValue<0 || myValue>9) {
+      alert("내 점수의 범위는 0~9 사이입니다.");
+      $('input#myValue').focus();
     } else {
 
       $.ajax({
@@ -204,12 +207,17 @@ $(document).ready(function () {
     
     if (isBlank(selectedItem)) {
       alert("모집단위를 선택하세요.");
-    } else 
-    if (isBlank(fAvgValue)) {
+    } else if (isBlank(fAvgValue)) {
       alert("내신 평균을 입력하세요.");
+      $('input#fAvgValue').focus();
+    }  else if (fAvgValue<0 || fAvgValue>9) {
+      alert("내신 평균의 범위는 0~9 사이입니다.");
       $('input#fAvgValue').focus();
     } else if (isBlank(lAvgValue)) {
       alert("내신 평균을 입력하세요.");
+      $('input#lAvgValue').focus();
+    } else if (lAvgValue<0 || lAvgValue>9) {
+      alert("내신 평균의 범위는 0~9 사이입니다.");
       $('input#lAvgValue').focus();
     } else {
 
@@ -231,6 +239,23 @@ $(document).ready(function () {
       })
     }
   });
+  
+  // 내점수 입력란 값 삭제
+  $('button.btn_clean_myValue').on('click', function () {
+    $('input#myValue').val("");
+  });
+
+  // 2021 내신 평균 입력란 값 삭제
+  $('button.btn_clean_avgValue').on('click', function () {
+    $('input#fAvgValue').val("");
+    $('input#lAvgValue').val("");
+  });
+
+  // checkbox 대학학과 리스트
+  $(document).on("click", "button#univInfoCheckBox", function () {    
+    $('input:checkbox').prop("checked", !$('input:checkbox').prop("checked"));
+  });
+
 
   // let username;
   // while (isBlank(username)) {

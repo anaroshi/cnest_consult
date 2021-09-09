@@ -76,7 +76,12 @@ section.inValSrh {
   display: flex;
   justify-content: space-between;
 }
+
 header {
   display: flex;
   justify-content: space-between;
+}
+
+i.bi  {
+  background-color: white;
 }

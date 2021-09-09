@@ -14,6 +14,7 @@
         <th scope="col">1단계인원</th>
         <th scope="col">최종</th>
         <th scope="col">수능최저학력기준</th>
+        <th scope="col"><button type="button" class="btn btn-outline-secondary" id="univInfoCheckBox">ON</button></th>
       </tr>
     </thead>
     <tbody>
@@ -22,14 +23,15 @@
         <td class="id" >{{.No}}</td>
         <td class="univId" id={{.Id}}>{{.UnivName}}</td>
         <td class="univForm">{{.Apply_formName}}</td>
-        <td>{{.Apply_dept_id}}</td>
+        <td class="dept">{{.Apply_dept_id}}</td>
         <td class="line">{{.Apply_line_id}}</td>
         <td class="volume">{{.Recruit_volume}}</td>
-        <td>{{.RecruitName}}</td>
-        <td>{{.Recruit1st}}</td>
+        <td class="name">{{.RecruitName}}</td>
+        <td class="1st">{{.Recruit1st}}</td>
         <td class="1stVol">{{.Recruit1stVol}}</td>
-        <td>{{.RecruitFinal}}</td>
-        <td>{{.SulimitName}}</td>
+        <td class="final">{{.RecruitFinal}}</td>
+        <td class="sulimit">{{.SulimitName}}</td>
+        <td><input class="form-check-input" type="checkbox" name="chkList" id="checkboxNoLabel" value="{{.Id}}" aria-label="..."></td>
       </tr>
     {{end}}
     </tbody>

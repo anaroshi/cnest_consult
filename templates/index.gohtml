@@ -26,20 +26,22 @@
       <section class="inValSrh" hidden>
         <div class="input-group" style="width: 400px;">
           <span class="input-group-text fw-semibold">내 점수</span>
-          <input type="number" class="form-control" id="myValue">        
+          <input type="number" class="form-control" id="myValue" min="0" max="9">        
           <button type="button" class="btn btn-dark btn_serch_myValue">조회</button>
+          <button type="button" class="btn btn-dark btn_clean_myValue">초기화</button>
         </div>
         <div class="input-group" style="width: 400px;">
           <span class="input-group-text fw-semibold">2021 내신 평균</span>
-          <input type="number" class="form-control" id="fAvgValue">
+          <input type="number" class="form-control" id="fAvgValue" min="0" max="9">
           <label for="" class="bg-dark" style="width: 30px; text-align: center; color:white;"> ~ </label>
-          <input type="number" class="form-control" id="lAvgValue">
+          <input type="number" class="form-control" id="lAvgValue" min="0" max="9">
           <button type="button" class="btn btn-dark btn_serch_avg">조회</button>
+          <button type="button" class="btn btn-dark btn_clean_avgValue">초기화</button>
         </div>
       </section>
       <div class="d-grid gap-3 d-md-block">
         <button type="button" class="btn btn-dark btn_clean" href="#">초기화</button>
-        <button type="button" class="btn btn-dark btn_print" disabled>엑셀출력</button>    
+        <button type="button" class="btn btn-dark btn_print" hidden>출력</button>    
       </div>    
     </header>
     <main>
@@ -68,7 +70,7 @@
             <li>        
               <div class="col-10 mb-1 fw-semibold strong">전공구분</div>
               <div class="col-10 mb-1 small">          
-                <select class="selectpicker applySubject" name="applySubject" size="5" aria-label="size 5"  data-width="370px"  multiple title="전공구분을 선택하세요" data-selected-text-format="count > 3">
+                <select class="selectpicker applySubject" name="applySubject" data-actions-box="true" size="5" aria-label="size 5"  data-width="370px" data-live-search="true" multiple title="전공구분을 선택하세요" data-selected-text-format="count > 3">
                   {{template "applySubjectOptionList"}}
                 </select>
               </div>  

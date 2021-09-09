@@ -158,6 +158,7 @@ func MakeHandler() http.Handler {
 	mux.HandleFunc("/indexPuniv", indexPuniv).Methods("POST")
 	mux.HandleFunc("/univDetail", univDetail)	
 	mux.HandleFunc("/chart", getChart)
+	mux.HandleFunc("/printUnivInfo", printUnivInfo)
 	mux.Handle("/favicon.ico", http.NotFoundHandler())
 	mux.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("./public/"))))
 	return mux
