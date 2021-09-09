@@ -33,7 +33,6 @@ func init() {
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
 	ApplySubjectOptionList(db)
-	//applyDeptOptionList(db)	 
 	tpl = template.Must(template.ParseGlob("templates/*.gohtml"))
 }
 
@@ -143,8 +142,8 @@ func connDB() *sql.DB {
 	return db
 }
 
-func page(w http.ResponseWriter, r *http.Request) {	
-	tpl.ExecuteTemplate(w,"page.gohtml", "")
+func getChart(w http.ResponseWriter, r *http.Request) {	
+	tpl.ExecuteTemplate(w,"chart.gohtml", "")
 }
 
 func MakeHandler() http.Handler {
@@ -157,9 +156,8 @@ func MakeHandler() http.Handler {
 	mux.HandleFunc("/indexP", indexP).Methods("GET")
 	mux.HandleFunc("/indexP", indexP).Methods("POST")
 	mux.HandleFunc("/indexPuniv", indexPuniv).Methods("POST")
-	mux.HandleFunc("/selectbox", selectbox)
 	mux.HandleFunc("/univDetail", univDetail)	
-	mux.HandleFunc("/page", page)
+	mux.HandleFunc("/chart", getChart)
 	mux.Handle("/favicon.ico", http.NotFoundHandler())
 	mux.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("./public/"))))
 	return mux

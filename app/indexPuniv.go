@@ -9,6 +9,7 @@ import (
 )
 
 type univ struct {
+	No int	`json:"no"`
 	Id int	`json:"id"`
 	UnivName string  `json:"univ_name"`
 	Apply_formName string `json:"apply_formName"`
@@ -32,11 +33,11 @@ type applyData2 struct {
 	ApplyDept []applyDeptList	
 }
 
-type Data [4]float32
-
-type klineData struct {
-	UnivName string  `json:"univ_name"`
-	Data
+type scatterData struct {
+	Sq string
+	UnivDeptNm string
+	Nasin_mean_2021 float32
+	SelfValue float32
 }
 
 // chart 생성
@@ -107,25 +108,27 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// ----------- 조건에 부합하는 대학들
-	qry := `SELECT u1.id, u2.univName, u1.apply_formName, u1.apply_dept_id, u1.apply_line_id, u1.recruit_volume, 
+	qry := `SELECT @ROWNUM := @ROWNUM + 1 AS no, A.id, A.univName, A.apply_formName, A.apply_dept_id, A.apply_line_id, 
+	A.recruit_volume, A.recruitName, A.recruit1st, A.recruit1stVol, A.recruitfinal, A.sulimitName  FROM
+	( SELECT u1.id, u2.univName, u1.apply_formName, u1.apply_dept_id, u1.apply_line_id, u1.recruit_volume, 
 	u3.recruitName, u3.recruit1st, u3.recruit1stVol, u3.recruitfinal, u4.sulimitName 
 	FROM univ_susi_info_fst u1 
 	INNER JOIN univ_info u2 ON u1.univ_id = u2.univId 
 	INNER JOIN recruit_method u3 ON u1.recruit_met_id=u3.recruitId 
 	INNER JOIN recruit_sununglimit u4 ON u1.recruit_su_lim_id = u4.sulimitId
 	INNER JOIN univ_susi_info_2021 u5 ON u1.suin_cd=u5.suin_cd
-	WHERE ` + qryStr
-	//fmt.Println("qry :",qry )
+	WHERE ` + qryStr + `ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id ) A, 
+	(SELECT @ROWNUM := 0 ) B`
+	fmt.Println("qry :",qry )
 	rows, err := db.Query(qry)
 	utils.HandleError(w, err, "dbselect")
-	defer rows.Close()
 
 	var s univ
 	
 	for rows.Next() {
 			
 		err = rows.Scan(
-			&s.Id, &s.UnivName, &s.Apply_formName, &s.Apply_dept_id, &s.Apply_line_id, &s.Recruit_volume, &s.RecruitName, 
+			&s.No, &s.Id, &s.UnivName, &s.Apply_formName, &s.Apply_dept_id, &s.Apply_line_id, &s.Recruit_volume, &s.RecruitName, 
 			&s.Recruit1st, &s.Recruit1stVol, &s.RecruitFinal, &s.SulimitName,
 		)
 		utils.HandleError(w, err, "loadValue")
@@ -134,61 +137,50 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	data := applyData1 { UnivInfo: univs, ApplyDept: applyDeptLists, }	
 	//fmt.Println(data)
 	
-
-	// var kd = []klineData{
-	// 	{UnivName: "명지대", Data: [4]float32{4.1, 2.78, 2.78, 4.1}},
-	// 	{UnivName: "시립대", Data: [4]float32{3.48, 1.8, 1.8, 3.48}},
-	// 	{UnivName: "산업대", Data: [4]float32{3.7, 3.3, 3.3, 3.7}},
-	// 	{UnivName: "경기대", Data: [4]float32{4.22, 3.98, 3.98, 4.22}},
-	// 	{UnivName: "중앙대", Data: [4]float32{5.75, 4.48, 4.48, 5.75}},
-	// 	{UnivName: "상명대", Data: [4]float32{4.1, 2.78, 2.78, 4.1}},
-	// 	{UnivName: "숙대", Data: [4]float32{3.48, 1.8, 1.8, 3.48}},
-	// 	{UnivName: "성대", Data: [4]float32{3.7, 3.3, 3.3, 3.7}},
-	// 	{UnivName: "단대", Data: [4]float32{4.22, 3.98, 3.98, 4.22}},
-	// 	{UnivName: "카톨릭대", Data: [4]float32{5.75, 4.48, 4.48, 5.75}},
-	// }
-
-	// var kd = []klineData{
-	// 	{UnivName: "명지대", Data: [4]float32{4.4, 0, 4.4, 4.0}},
-	// 	{UnivName: "시립대", Data: [4]float32{3.91, 2.48, 3.91, 2.48,}},
-	// 	{UnivName: "산업대", Data: [4]float32{3.9, 0, 3.9, 0}},
-	// 	{UnivName: "경기대", Data: [4]float32{4.72, 3.42, 4.72, 3.42}},
-	// 	{UnivName: "중앙대", Data: [4]float32{2.4, 1.9, 2.4, 1.9}},
-	// 	{UnivName: "상명대", Data: [4]float32{3.19, 0, 3.19, 0}},
-	// 	{UnivName: "숙대", Data: [4]float32{2.93, 0, 2.93, 0}},
-	// 	{UnivName: "성대", Data: [4]float32{2.8, 0, 2.8, 0}},
-	// 	{UnivName: "단대", Data: [4]float32{0, 0, 3.98, 4.22}},
-	// 	{UnivName: "카톨릭대", Data: [4]float32{3.61, 1.67, 3.61, 1.67}},
-	// }
-
-	chartData := []klineData{}
-	var kd klineData
+	var sd scatterData
 
 	// Chart Data	
-	qry = `SELECT u2.univName, max(u5.nasin_mean_2021), min(u5.nasin_mean_2021), max(u5.nasin_mean_2021), min(u5.nasin_mean_2021)
-	FROM univ_susi_info_fst u1 
-	INNER JOIN univ_info u2 ON u1.univ_id = u2.univId 
-	INNER JOIN univ_susi_info_2021 u5 ON u1.suin_cd=u5.suin_cd
-	WHERE ` + qryStr + ` GROUP BY u1.univ_id`
+	qry = `
+		SELECT @ROWNUM := @ROWNUM + 1 AS no, A.subjNm, A.nasinMean FROM
+		( SELECT CONCAT(u2.univName, '-', u1.apply_dept_id) subjNm, u5.nasin_mean_2021 nasinMean
+		FROM univ_susi_info_fst u1 
+		INNER JOIN univ_info u2 ON u1.univ_id = u2.univId 
+		INNER JOIN univ_susi_info_2021 u5 ON u1.suin_cd=u5.suin_cd
+		WHERE ` + qryStr + ` ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id) A, 
+		(SELECT @ROWNUM := 0 ) B`
+
+		
 	fmt.Println("qry :",qry )
 
 	rows, err = db.Query(qry)
 	utils.HandleError(w, err, "dbselect for chart")
 	defer rows.Close()
 
+	var (
+		No []string
+		SubjNm []string
+		AvgValue []float32
+		StdValue []float32
+	)
+
 	for rows.Next() {
 			
 		err = rows.Scan(
-			&kd.UnivName, &kd.Data[0], &kd.Data[1], &kd.Data[2], &kd.Data[3],
+			&sd.Sq, &sd.UnivDeptNm, &sd.Nasin_mean_2021,
 		)
 		utils.HandleError(w, err, "load ChartValue")
-		chartData = append(chartData, kd)	
+		No = append(No, sd.Sq)
+		SubjNm = append(SubjNm, sd.UnivDeptNm)
+		AvgValue = append(AvgValue, sd.Nasin_mean_2021)
+		StdValue = append(StdValue, 2.7)
 	}	
+	
+	// No   		= []int{1,2,3,4,5,6,7,8,9}
+	// SubjNm   = []string{"Swimming", "Surfing", "Shooting ", "Skating", "Wrestling", "Diving", "Wrestling", "Diving", "Skating"}
+	// AvgValue = []float32{2.9, 3.28, 2.73, 2.63, 3.39, 4.94, 4.27, 3.6, 1.85}
+	//StdValue  = []float32{3, 3, 3, 3, 3, 3, 3, 3, 3}
 
-	fmt.Println(chartData)
-	//chart(w, chartData)
-
-	//chart(w, kd)
+	chart(w, No, SubjNm, AvgValue, StdValue)
 
 	tpl.ExecuteTemplate(w, "indexPuniv.gohtml", data)
 }

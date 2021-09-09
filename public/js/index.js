@@ -108,6 +108,7 @@ $(document).ready(function () {
         $("select.applyDept option").remove();
         $("select.applyDept").append(data);
         $(".selectpicker").selectpicker('refresh');
+
         if($("button.btn_serchUniv").prop("disabled")){
           $("button.btn_serchUniv").prop("disabled", false);
         }
@@ -117,8 +118,6 @@ $(document).ready(function () {
         $('input#lAvgValue').val("");
         $("section.inValSrh").prop("hidden", true);
         $("input#img").prop("hidden", false);
-        //$("section.mainBody").append(`<input id="img" type="image" src="image/main_image.png" alt="" width="1400" height="800" allowfullscreen>`);
-        
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.log('서버오류: '+ textStatus);
@@ -145,9 +144,7 @@ $(document).ready(function () {
       .done(async function (data) {
         // Add data in 대학목록
         //$('div.univListChart').html(`<iframe width="1200" height="550" frameborder="0" style="border:0" src="/page" allowfullscreen></iframe>`);        
-        //$('img').prop("disabled", false);
         $("input#img").prop("hidden", true);
-        //$('#img').remove();
         $('div.univListbydept').html(data);
         $("section.inValSrh").prop("hidden", false);
 
