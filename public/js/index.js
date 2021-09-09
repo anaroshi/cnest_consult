@@ -22,19 +22,23 @@ $(document).ready(function () {
     });
     alert(chk_val);    
     
-    $.ajax({
-      type: "POST",
-      url: "/happy",
-      data: { chk_val },
-      dataType: "html",
-    })
-    .done(async function (data) {
-      
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      console.log('서버오류: '+ textStatus);
-      console.log('서버오류: '+ errorThrown);
-    })
+    if (isBlank(chk_val)) {
+      alert("지원대학을 선택하세요.");
+    } else {
+
+      $.ajax({
+        type: "POST",
+        url: "/printUnivInfo",
+        data: { chk_val },
+        dataType: "html",
+      })
+      .done(async function (data) {
+      })
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log('서버오류: '+ textStatus);
+        console.log('서버오류: '+ errorThrown);
+      })
+    }
   });
 
   

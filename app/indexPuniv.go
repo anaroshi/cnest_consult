@@ -6,7 +6,10 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"sync"
 )
+
+var wg sync.WaitGroup
 
 type univ struct {
 	No int	`json:"no"`
@@ -48,25 +51,24 @@ type scatterData struct {
 // 수정함
 func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	
+	// Required if you don't call r.FormValue()
 	if err := r.ParseForm(); err != nil {
 		fmt.Fprintf(w, "ParseForm() err %v", err)
 	}
+	fmt.Println("r.Form : ", r.Form)
+
 	db = connDB()
 	defer db.Close()
 
 	univs := []univ{}
 	applyDeptLists := []applyDeptList{}	
-
-	r.ParseForm() // Required if you don't call r.FormValue()
-	fmt.Println("r.Form : ", r.Form)
 	
 	dept := r.Form["selectedItem[]"]
 	//fmt.Println(dept)
 	
-	if dept == nil || dept[0] == "" {
-		fmt.Println("*")
+	if dept == nil || dept[0] == "" {		
 		js := `<script type="text/javascript" charset="utf-8">
-		alert("모집단위를--선택하세요!");
+		alert("모집단위를 선택하세요!");
 		</script>`
 
 		w.Write([]byte(js))
@@ -179,8 +181,10 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	// SubjNm   = []string{"Swimming", "Surfing", "Shooting ", "Skating", "Wrestling", "Diving", "Wrestling", "Diving", "Skating"}
 	// AvgValue = []float32{2.9, 3.28, 2.73, 2.63, 3.39, 4.94, 4.27, 3.6, 1.85}
 	//StdValue  = []float32{3, 3, 3, 3, 3, 3, 3, 3, 3}
-
-	chart(w, No, SubjNm, AvgValue, StdValue)
+	
+	wg.Add(1)
+	go chart(w, No, SubjNm, AvgValue, StdValue)
+	wg.Wait()
 
 	tpl.ExecuteTemplate(w, "indexPuniv.gohtml", data)
 }

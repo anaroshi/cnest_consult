@@ -117,4 +117,5 @@ func chart(w http.ResponseWriter, No []string, SubjNm []string, AvgValue[]float3
 	// 	panic(err)
 	// }
 	page.Render(io.MultiWriter(w))
+	wg.Done()
 }

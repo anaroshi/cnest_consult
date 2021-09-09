@@ -2,35 +2,36 @@ package app
 
 import (
 	"cnest_consult/utils"
+	"database/sql"
 	"net/http"
 )
 
 type detailUniv1 struct {
 	Id int
-	Suin_cd *string
-	UnivName *string
-	Apply_term_id *string
-	Apply_form *string
-	Apply_formName *string
-	Apply_dept_id *string
-	Apply_line_id *string
-	ApSubjectName *string
+	Suin_cd string
+	UnivName string
+	Apply_term_id string
+	Apply_form string
+	Apply_formName string
+	Apply_dept_id string
+	Apply_line_id string
+	ApSubjectName string
 	Recruit_volume int
-	QualiName *string
-	RecruitName *string
-	Recruit1st *string
-	Recruit1stVol *string
-	RecruitFinal *string
-	SulimitName *string
-	NasinmetName *string
-	DocmetName *string
-	IntmetName *string
-	NslmetName *string
-	EtcmetName *string
-	DoclstName *string
-	AtwrtName *string
+	QualiName string
+	RecruitName string
+	Recruit1st string
+	Recruit1stVol string
+	RecruitFinal string
+	SulimitName string
+	NasinmetName string
+	DocmetName string
+	IntmetName string
+	NslmetName string
+	EtcmetName string
+	DoclstName string
+	AtwrtName sql.NullString
 }	
-
+//string -> *string  -> sql.NullString
 type detailUniv2 struct {
 	Remarks  string
 	ApplyDatetime  string

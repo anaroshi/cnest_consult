@@ -175,7 +175,3 @@ func (sao *searchApplyOption) getSrhOpt2(ao string) string {
 	sao.ApplyOptions2 = sao.ApplyOptions1 + "AND (" + ao + ") "
 	return sao.ApplyOptions2
 }
-
-func selectbox(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "selectbox.gohtml", nil)
-}
