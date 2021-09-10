@@ -8,7 +8,13 @@ import (
 	"github.com/xuri/excelize"
 )
 
+//filename := "./data/data-selectedUnvi.xlsx"
+const filename = "data-selectedUnvi.xlsx"
+
 func printUnivInfo(w http.ResponseWriter, r *http.Request) {
+
+
+
 	// Required if you don't call r.FormValue()
 	if err := r.ParseForm(); err != nil {
 		fmt.Fprintf(w, "printUnivInfo err %v", err)
@@ -25,8 +31,8 @@ func printUnivInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	
 	f := excelize.NewFile()
+	
 	// Create a new sheet.
 	index := f.NewSheet("Sheet2")
 	
@@ -162,8 +168,14 @@ func printUnivInfo(w http.ResponseWriter, r *http.Request) {
 	// Set active sheet of the workbook.
 	f.SetActiveSheet(index)
 	// Save spreadsheet by the given path.
-	if err := f.SaveAs("data-selectedUnvi.xlsx"); err != nil {
+
+	if err := f.SaveAs(filename); err != nil {
 			fmt.Println(err)
 	}
-}
 
+		w.Header().Set("Content-Disposition", "attachment; filename="+strconv.Quote(filename))
+		w.Header().Set("Content-Type", "application/octet-stream")
+		http.ServeFile(w, r, "/")
+	
+
+}

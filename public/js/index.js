@@ -20,7 +20,6 @@ $(document).ready(function () {
     $('input[type="checkbox"]:checked').each(function(index) {
       chk_val.push($(this).val());
     });
-    alert(chk_val);    
     
     if (isBlank(chk_val)) {
       alert("지원대학을 선택하세요.");
@@ -57,6 +56,12 @@ $(document).ready(function () {
     var id = tr.children('.univId').attr('id');
     // var id = $(this).children('.univId').attr('id');
     
+    // 자신의 checkbox check여부 확인
+    var idVal = false;
+    if($(`input#chkList_${id}`).is(':checked')){ 
+      idVal = true;      
+    }
+
     if (id != "") {
       $.ajax({
         type: "POST",
@@ -69,7 +74,13 @@ $(document).ready(function () {
         $('.modal-body').html(response); 
     
         // Display Modal
-        $('#univModal').modal('show');    
+        $('#univModal').modal('show');
+
+        if(idVal==true) {
+          $('input.subChkList').prop("checked");
+        } else {
+          !$('input.subChkList').prop("checked");
+        }
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.log('서버오류: '+ textStatus);
@@ -77,6 +88,11 @@ $(document).ready(function () {
       })
     }
   });
+  // !$('input[type="checkbox"]:checked').each(function(index) {
+  //   callId = $('.univId').attr('id');
+  //   if (id == callId) {
+  //     $('input:checkbox').prop("checked");
+
 
   // 전형, 계열, 전공 구분 
   $('.btn_serchDept').on('click', function (e) {
@@ -259,6 +275,43 @@ $(document).ready(function () {
   $(document).on("click", "button#univInfoCheckBox", function () {    
     $('input:checkbox').prop("checked", !$('input:checkbox').prop("checked"));
   });
+
+  // 
+  // $(document).on('change', 'input.chkList', function () {
+  //   var id = $(this).attr('id');
+  //   if($(this).is(':checked')){ 
+  //     alert("체크박스 체크 했음!"+id);
+  //   } else {
+  //     alert("체크박스 체크 해제!"+id);
+  //   }
+  // });
+
+ // 대학 상세 화면에서 체크박스 이벤트
+
+//  $('input.subChkList').on('change', function () {
+//   var callId;
+//   var id = $('.modal_univId').attr('id');    
+//   if($('input.form-check-input').is(':checked')){      
+//     alert("체크박스 체크했음!"+id);
+//     callId = $('.univId').attr('id');
+//     alert("체크박스 체크했음!"+callId);
+          
+//     !$('input[type="checkbox"]:checked').each(function(index) {
+//       callId = $('.univId').attr('id');
+//       if (id == callId) {
+//         $('input:checkbox').prop("checked");
+//       }
+//     });  
+
+//   }else{
+//     alert("체크박스 체크 해제!"+id);
+    
+//    // !$('input:checkbox').prop("checked");
+//   }
+//});
+
+
+
 
 
   // let username;
