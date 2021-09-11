@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-  $('select').selectpicker();
+  $('select').selectpicker();  
 
   let isBlank = function (string) {
     return string == null || string === "";
@@ -17,10 +17,10 @@ $(document).ready(function () {
     e.preventDefault();
 
     let chk_val = [];
-    $('input[type="checkbox"]:checked').each(function(index) {
+    $('input.chkList:checked').each(function(index) {
       chk_val.push($(this).val());
     });
-    
+    alert(chk_val);
     if (isBlank(chk_val)) {
       alert("지원대학을 선택하세요.");
     } else {

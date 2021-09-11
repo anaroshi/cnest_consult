@@ -10,6 +10,8 @@ import (
 )
 
 var wg sync.WaitGroup
+var myValueStr string
+var myValueFlt = 2.7
 
 type univ struct {
 	No int	`json:"no"`
@@ -44,10 +46,6 @@ type scatterData struct {
 }
 
 // chart 생성
-// html 내부에 포함 시키는 것으로
-// head foot 태그 내용 제외시킴
-// /home/sundor/workspace/go/src/github.com/go-echarts/go-echarts/templates/base.go
-// /home/sundor/workspace/go/src/github.com/go-echarts/go-echarts/templates/page.go
 // 수정함
 func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	
@@ -93,10 +91,11 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	qryStr := aaaa.getSrhOpt2(formQry4)
 
 	// 내점수
-	var myValueInt float64
-	if myValue != nil {		
-		myValueInt, _ = strconv.ParseFloat(myValue[0], 64)
-		qryStr = getMyOpts(myValueInt, qryStr)
+	myValueFlt = 2.7
+	if myValue != nil {
+		myValueStr = myValue[0]
+		myValueFlt, _ = strconv.ParseFloat(myValueStr, 64)
+		qryStr = getMyOpts(myValueFlt, qryStr)
 	}
 	
 
@@ -174,7 +173,7 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 		No = append(No, sd.Sq)
 		SubjNm = append(SubjNm, sd.UnivDeptNm)
 		AvgValue = append(AvgValue, sd.Nasin_mean_2021)
-		StdValue = append(StdValue, 2.7)
+		StdValue = append(StdValue, float32(myValueFlt))
 	}	
 	
 	// No   		= []int{1,2,3,4,5,6,7,8,9}
@@ -189,9 +188,9 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "indexPuniv.gohtml", data)
 }
 
-func getMyOpts(myValueInt float64, qryStr string) string {
-	fMyValue := myValueInt - 0.3
-	lMyValue := myValueInt + 0.3
+func getMyOpts(myValueFlt float64, qryStr string) string {
+	fMyValue := myValueFlt - 0.3
+	lMyValue := myValueFlt + 0.3
 	formQry5 := fmt.Sprintln(" AND u5.nasin_mean_2021 BETWEEN ", fMyValue, " AND ", lMyValue)
 	qryStr += formQry5
 	return qryStr

@@ -8,12 +8,10 @@ import (
 	"github.com/xuri/excelize"
 )
 
-//filename := "./data/data-selectedUnvi.xlsx"
-const filename = "data-selectedUnvi.xlsx"
+const filename = "./data/data-selectedUnvi.xlsx"
+//const filename = "data-selectedUnvi.xlsx"
 
 func printUnivInfo(w http.ResponseWriter, r *http.Request) {
-
-
 
 	// Required if you don't call r.FormValue()
 	if err := r.ParseForm(); err != nil {
@@ -37,7 +35,7 @@ func printUnivInfo(w http.ResponseWriter, r *http.Request) {
 	index := f.NewSheet("Sheet2")
 	
 	// Set Title of a cell.
-	f.SetCellValue("Sheet2", "A1", "지원 가능 대학")
+	f.SetCellValue("Sheet2", "A1", "지원 가능 대학")	
 	f.SetCellValue("Sheet2", "A2", "Id")
 	f.SetCellValue("Sheet2", "B2", "대학교")
 	f.SetCellValue("Sheet2", "C2", "모집시기")
@@ -93,6 +91,7 @@ func printUnivInfo(w http.ResponseWriter, r *http.Request) {
 	f.SetCellValue("Sheet2", "AW2", "2019내신최저")
 	f.SetCellValue("Sheet2", "AX2", "2019전형평균")
 
+	f.MergeCell("Sheet2", "A1", "T1")
 
 	db = connDB()
 	defer db.Close()
@@ -162,7 +161,7 @@ func printUnivInfo(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	fmt.Println(unviAllInfos)
+	fmt.Println("unviAllInfos==>",unviAllInfos)
 
 	f.SetCellValue("Sheet1", "B2", 100)
 	// Set active sheet of the workbook.
@@ -173,9 +172,30 @@ func printUnivInfo(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 	}
 
-		w.Header().Set("Content-Disposition", "attachment; filename="+strconv.Quote(filename))
-		w.Header().Set("Content-Type", "application/octet-stream")
-		http.ServeFile(w, r, "/")
+	// err := os.Chmod(filename, 0777)
+	// utils.HandleErr(err, "file authorization")
+
+	// bytes, err := ioutil.ReadFile(filename)
+	// if err != nil {
+	// 		panic(err)
+	// }
 	
 
+	// //파일 쓰기
+	// err = ioutil.WriteFile("./data/data.xlsx", bytes, 0)
+	// if err != nil {
+	// 		panic(err)
+	// }
+
+
+	// w.Header().Set("Content-Disposition", "attachment; filename="+strconv.Quote(filename))
+// w.Header().Set("Content-Type", r.Header.Get("Content-Type"))
+
+	w.Header().Set("Content-Disposition", "attachment; filename="+strconv.Quote(filename))
+	w.Header().Set("Content-Type", "application/octet-stream")
+
+	http.ServeFile(w, r, "/home/sundor/workspace/go/src/cnest_consult/data/data-selectedUnvi.xlsx")
+
+	//tpl.ExecuteTemplate(w, "print.gohtml", nil)
+	//http.ServeFile(w, r, filename)
 }
