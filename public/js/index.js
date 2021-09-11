@@ -52,14 +52,16 @@ $(document).ready(function () {
     // $('td.univId').on('click', function (e) {   
     e.preventDefault();
     
-    var tr = $(this).closest("tr");
-    var id = tr.children('.univId').attr('id');
-    // var id = $(this).children('.univId').attr('id');
+    let tr = $(this).closest("tr");
+    let id = tr.children('.univId').attr('id');
+    // let id = $(this).children('.univId').attr('id');
     
     // 자신의 checkbox check여부 확인
-    var idVal = false;
+    let idVal = "false";
     if($(`input#chkList_${id}`).is(':checked')){ 
-      idVal = true;      
+      idVal = "true";
+    } else {
+      idVal = "false";
     }
 
     if (id != "") {
@@ -70,17 +72,19 @@ $(document).ready(function () {
         dataType: "html",
       })
       .done(async function (response) {
+        // 모달창 checkbox 반영
+        if(idVal == "true"){
+          $('input.subChkList').prop('checked', true);
+        } else {
+          $('input.subChkList').prop('checked', false);
+        }
+
         // Add response in Modal body
         $('.modal-body').html(response); 
     
         // Display Modal
         $('#univModal').modal('show');
-
-        if(idVal==true) {
-          $('input.subChkList').prop("checked");
-        } else {
-          !$('input.subChkList').prop("checked");
-        }
+        
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.log('서버오류: '+ textStatus);
@@ -276,50 +280,17 @@ $(document).ready(function () {
     $('input:checkbox').prop("checked", !$('input:checkbox').prop("checked"));
   });
 
-  // 
-  // $(document).on('change', 'input.chkList', function () {
-  //   var id = $(this).attr('id');
-  //   if($(this).is(':checked')){ 
-  //     alert("체크박스 체크 했음!"+id);
-  //   } else {
-  //     alert("체크박스 체크 해제!"+id);
-  //   }
-  // });
-
- // 대학 상세 화면에서 체크박스 이벤트
-
-//  $('input.subChkList').on('change', function () {
-//   var callId;
-//   var id = $('.modal_univId').attr('id');    
-//   if($('input.form-check-input').is(':checked')){      
-//     alert("체크박스 체크했음!"+id);
-//     callId = $('.univId').attr('id');
-//     alert("체크박스 체크했음!"+callId);
-          
-//     !$('input[type="checkbox"]:checked').each(function(index) {
-//       callId = $('.univId').attr('id');
-//       if (id == callId) {
-//         $('input:checkbox').prop("checked");
-//       }
-//     });  
-
-//   }else{
-//     alert("체크박스 체크 해제!"+id);
+ // 대학 상세 화면 에서 체크박스 이벤트
+ // 모달창 체크여부에 따라 리스트의 체크 여부 반영됨
+  $('input.subChkList').on('change', function () {
     
-//    // !$('input:checkbox').prop("checked");
-//   }
-//});
-
-
-
-
-
-  // let username;
-  // while (isBlank(username)) {
-  //   username = prompt("What's your name?");
-  //   if (!isBlank(username)) {
-  //     $('#user-name').html('<b>' + username + '</b>');
-  //   }
-  // }
+    let id = $('.modal_univId').attr('id');
+    // alert(`chkList_${id}`);
+    if($('input.subChkList').is(':checked')){
+      $(`input#chkList_${id}`).prop('checked', true);
+    } else {
+      $(`input#chkList_${id}`).prop('checked', false);
+    }
+  });
 
 });
