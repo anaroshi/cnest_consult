@@ -20,7 +20,7 @@ $(document).ready(function () {
     $('input.chkList:checked').each(function(index) {
       chk_val.push($(this).val());
     });
-    alert(chk_val);
+    //alert(chk_val);
     if (isBlank(chk_val)) {
       alert("지원대학을 선택하세요.");
     } else {
