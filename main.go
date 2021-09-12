@@ -4,6 +4,7 @@ import (
 	"cnest_consult/app"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/urfave/negroni"
 )
@@ -14,5 +15,6 @@ func main() {
 	n.UseHandler(mux)
 
 	log.Println("Started App")
-	log.Fatalln(http.ListenAndServe(":3000", n))
+	port := os.Getenv("PORT")
+	log.Fatalln(http.ListenAndServe(":"+port, n))
 }
