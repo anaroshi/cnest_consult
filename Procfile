@@ -1,1 +1,1 @@
-web: bin/univ
+web:bin/univ
