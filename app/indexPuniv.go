@@ -1,7 +1,7 @@
 package app
 
 import (
-	"cnest_consult/utils"
+	"cnest_consult/univ/utils"
 	"fmt"
 	"net/http"
 	"strconv"

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/xuri/excelize"
+	"github.com/xuri/excelize/v2"
 )
 
 const filename = "./data/data-selectedUnvi.xlsx"
