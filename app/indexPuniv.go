@@ -70,7 +70,7 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 		</script>`
 
 		w.Write([]byte(js))
-		tpl.ExecuteTemplate(w, "index.html", univs)
+		tpl.ExecuteTemplate(w, "index.gohtml", univs)
 		return
 	}
 
@@ -185,7 +185,7 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	go chart(w, No, SubjNm, AvgValue, StdValue)
 	wg.Wait()
 
-	tpl.ExecuteTemplate(w, "indexPuniv.html", data)
+	tpl.ExecuteTemplate(w, "indexPuniv.gohtml", data)
 }
 
 func getMyOpts(myValueFlt float64, qryStr string) string {

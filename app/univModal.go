@@ -212,5 +212,5 @@ func univDetail(w http.ResponseWriter, r *http.Request) {
 		
 	data := items{Info_1:a, Info_2:b, N_21:n21, N_20:n20, N_19:n19, }
 
-	tpl.ExecuteTemplate(w, "univDetail.html", data)
+	tpl.ExecuteTemplate(w, "univDetail.gohtml", data)
 }

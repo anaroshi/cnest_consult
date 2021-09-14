@@ -112,7 +112,7 @@ func chart(w http.ResponseWriter, No []string, SubjNm []string, AvgValue[]float3
 	page.AddCharts(
 		scatterShowLabel(No, AvgValue, StdValue),		
 	)
-	// f, err := os.Create("./templates/chart.html")
+	// f, err := os.Create("./templates/chart.gohtml")
 	// if err != nil {
 	// 	panic(err)
 	// }

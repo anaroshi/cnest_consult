@@ -40,7 +40,7 @@ func ApplyFormOptionList(db *sql.DB) {
 	optLists = append(optLists, "{{ end }}")
 	optStr = strings.Join(optLists,"\n")
 	
-	nf, err := os.Create(PartsPath+"include_applyform_option.html")
+	nf, err := os.Create(PartsPath+"include_applyform_option.gohtml")
 	utils.HandleErr(err,"applyFormOptionFileCreate")
 	defer nf.Close()
 	io.Copy(nf, strings.NewReader(optStr))
@@ -70,7 +70,7 @@ func ApplyLineOptionList(db *sql.DB) {
 	optLists = append(optLists, "{{ end }}")
 	optStr = strings.Join(optLists,"\n")
 	
-	nf, err := os.Create(PartsPath+"include_applyline_option.html")
+	nf, err := os.Create(PartsPath+"include_applyline_option.gohtml")
 	utils.HandleErr(err,"applyLineOptionFileCreate")
 	defer nf.Close()
 	io.Copy(nf, strings.NewReader(optStr))
@@ -99,7 +99,7 @@ func ApplySubjectOptionList(db *sql.DB) {
 	optLists = append(optLists, "{{ end }}")
 	optStr = strings.Join(optLists,"\n")
 	
-	nf, err := os.Create(PartsPath+"include_applysubject_option.html")
+	nf, err := os.Create(PartsPath+"include_applysubject_option.gohtml")
 	utils.HandleErr(err,"applySubjectOptionFileCreate")
 	defer nf.Close()
 	io.Copy(nf, strings.NewReader(optStr))
@@ -128,8 +128,8 @@ func ApplySubjectOptionList(db *sql.DB) {
 // 	optLists = append(optLists, "{{ end }}")
 // 	optStr = strings.Join(optLists,"\n")
 	
-// 	//nf, err := os.Create("/home/sundor/workspace/go/src/cnest/db/../templates/parts/applydept_option.html")
-// 	nf, err := os.Create(PartsPath+"include_applydept_option.html")
+// 	//nf, err := os.Create("/home/sundor/workspace/go/src/cnest/db/../templates/parts/applydept_option.gohtml")
+// 	nf, err := os.Create(PartsPath+"include_applydept_option.gohtml")
 // 	utils.HandleErr(err,"applyDeptOptionFileCreate")
 // 	defer nf.Close()
 // 	io.Copy(nf, strings.NewReader(optStr))
