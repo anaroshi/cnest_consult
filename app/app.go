@@ -133,7 +133,8 @@ if r.Method == http.MethodPost {
 
 //DB connection
 func connDB() *sql.DB {
-	connStr := "sundor:anaroshi@tcp(localhost:3306)/cst_univ"
+	//connStr := "sundor:anaroshi@tcp(localhost:3306)/cst_univ"
+	connStr := ""
 	db, err := sql.Open("mysql", connStr)
 	utils.HandleErr(err, "dbconn")
 	err = db.Ping()
