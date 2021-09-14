@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/xuri/excelize/v2"
+	"github.com/360EntSecGroup-Skylar/excelize/v2"
 )
 
 const filename = "./data/data-selectedUnvi.xlsx"
@@ -196,6 +196,6 @@ func printUnivInfo(w http.ResponseWriter, r *http.Request) {
 
 	http.ServeFile(w, r, "/home/sundor/workspace/go/src/cnest_consult/data/data-selectedUnvi.xlsx")
 
-	//tpl.ExecuteTemplate(w, "print.html", nil)
+	//tpl.ExecuteTemplate(w, "print.gohtml", nil)
 	//http.ServeFile(w, r, filename)
 }
