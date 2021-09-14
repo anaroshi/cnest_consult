@@ -33,7 +33,7 @@ func init() {
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
 	ApplySubjectOptionList(db)
-	tpl = template.Must(template.ParseGlob("templates/*.gohtml"))
+	tpl = template.Must(template.ParseGlob("templates/*.html"))
 }
 
 type applyDeptList struct {
@@ -54,7 +54,7 @@ type searchApplyOption struct {
 var aaaa searchApplyOption
 
 func indexG(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "index.gohtml", nil)
+	tpl.ExecuteTemplate(w, "index.html", nil)
 }
 
 func indexP(w http.ResponseWriter, r *http.Request) {
@@ -128,7 +128,7 @@ if r.Method == http.MethodPost {
 	fmt.Println(ad)
 	fmt.Println(options)
 }
-	tpl.ExecuteTemplate(w, "applyDept.gohtml", applyDeptLists)
+	tpl.ExecuteTemplate(w, "applyDept.html", applyDeptLists)
 }
 
 //DB connection
@@ -144,7 +144,7 @@ func connDB() *sql.DB {
 }
 
 func getChart(w http.ResponseWriter, r *http.Request) {	
-	tpl.ExecuteTemplate(w,"chart.gohtml", "")
+	tpl.ExecuteTemplate(w,"chart.html", "")
 }
 
 func MakeHandler() http.Handler {
