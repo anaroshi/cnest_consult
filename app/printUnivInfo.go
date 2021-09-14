@@ -196,6 +196,6 @@ func printUnivInfo(w http.ResponseWriter, r *http.Request) {
 
 	http.ServeFile(w, r, "/home/sundor/workspace/go/src/cnest_consult/data/data-selectedUnvi.xlsx")
 
-	//tpl.ExecuteTemplate(w, "print.gohtml", nil)
+	//tpl.ExecuteTemplate(w, "print.html", nil)
 	//http.ServeFile(w, r, filename)
 }
