@@ -70,7 +70,6 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 		</script>`
 
 		w.Write([]byte(js))
-		tpl.ExecuteTemplate(w, "index.html", univs)
 		return
 	}
 
