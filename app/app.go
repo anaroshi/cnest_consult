@@ -9,8 +9,9 @@ import (
 	"os"
 	"strings"
 
-	_ "github.com/go-sql-driver/mysql"
+	//_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	_ "github.com/lib/pq"
 )
 
 // type rawTime []byte
