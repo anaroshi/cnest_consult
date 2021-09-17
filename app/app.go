@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -133,8 +134,12 @@ if r.Method == http.MethodPost {
 
 //DB connection
 func connDB() *sql.DB {
-	connStr := "b89b28c48a88d0:21d95440@tcp(us-cdbr-east-04.cleardb.com:3306)/heroku_d92ae08e43b556b"	
-	db, err := sql.Open("mysql", connStr)
+	// connStr := "b89b28c48a88d0:21d95440@tcp(us-cdbr-east-04.cleardb.com:3306)/heroku_d92ae08e43b556b"	// mysql
+	// db, err := sql.Open("mysql", connStr)
+	
+	connStr := os.Getenv("DATABASE_URL") // postgres
+	db, err := sql.Open("postgres", connStr)
+	
 	utils.HandleErr(err, "dbconn")
 	err = db.Ping()
 	utils.HandleErr(err, "dbping")
