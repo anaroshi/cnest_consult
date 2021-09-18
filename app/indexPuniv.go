@@ -108,7 +108,7 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// ----------- 조건에 부합하는 대학들
-	qry := `SELECT @ROWNUM := @ROWNUM + 1 AS no, A.id, A.univName, A.apply_formName, A.apply_dept_id, A.apply_line_id, 
+	qry := `SELECT B.@ROWNUM := B.@ROWNUM + 1 AS no, A.id, A.univName, A.apply_formName, A.apply_dept_id, A.apply_line_id, 
 	A.recruit_volume, A.recruitName, A.recruit1st, A.recruit1stVol, A.recruitfinal, A.sulimitName  FROM
 	( SELECT u1.id, u2.univName, u1.apply_formName, u1.apply_dept_id, u1.apply_line_id, u1.recruit_volume, 
 	u3.recruitName, u3.recruit1st, u3.recruit1stVol, u3.recruitfinal, u4.sulimitName 
