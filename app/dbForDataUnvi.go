@@ -39,7 +39,7 @@ func dbForDataUnvi(db *sql.DB) {
 	statement, err = db.Prepare(
 		`CREATE TABLE univ_susi_info_snd (
 			id SERIAL PRIMARY KEY,
-			suin_cd varchar(16) PRIMARY KEY,
+			suin_cd varchar(16) NOT NULL,
 			remarks varchar(256) NOT NULL,
 			apply_datetime varchar(128),
 			apply_docu_datetime varchar(128),
@@ -56,7 +56,7 @@ func dbForDataUnvi(db *sql.DB) {
 	statement, err = db.Prepare(
 		`CREATE TABLE univ_susi_info_2021 (
 			id SERIAL PRIMARY KEY,
-			suin_cd varchar(16) PRIMARY KEY,
+			suin_cd varchar(16) NOT NULL,
 			recruit_volume_2021 float,
 			compete_ratio_2021 varchar(16),
 			recruit_replace_2021 integer,
@@ -73,7 +73,7 @@ func dbForDataUnvi(db *sql.DB) {
 	statement, err = db.Prepare(
 		`CREATE TABLE univ_susi_info_2020 (
 			id SERIAL PRIMARY KEY,
-			suin_cd varchar(16) PRIMARY KEY,
+			suin_cd varchar(16) FNOT NULL,
 			recruit_volume_2020 float,
 			compete_ratio_2020 varchar(16),
 			recruit_replace_2020 integer,
@@ -90,7 +90,7 @@ func dbForDataUnvi(db *sql.DB) {
 	statement, err = db.Prepare(
 		`CREATE TABLE univ_susi_info_2019 (
 			id SERIAL PRIMARY KEY,
-			suin_cd varchar(16) PRIMARY KEY,
+			suin_cd varchar(16) NOT NULL,
 			recruit_volume_2019 float,
 			compete_ratio_2019 varchar(16),
 			recruit_replace_2019 integer,
