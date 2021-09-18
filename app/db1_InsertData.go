@@ -5,7 +5,7 @@ import (
 	"database/sql"
 )
 
-func dbInsertData(db *sql.DB) {
+func db1_InsertData(db *sql.DB) {
 
 	stmt, err := db.Prepare(
 		`INSERT INTO apply_line (
@@ -70,7 +70,7 @@ func dbInsertData(db *sql.DB) {
 	utils.HandleErr(err, "create table13 exec")
 
 	stmt, err = db.Prepare(
-		`IINSERT INTO apply_dept (id, deptId, deptName, sort, flag) VALUES
+		`INSERT INTO apply_dept (id, deptId, deptName, sort, flag) VALUES
 		(1, 'dept_0001', 'AI디자인학과', 0, 0),
 		(2, 'dept_0002', 'AI로봇전공', 0, 0),
 		(3, 'dept_0003', 'AI빅데이터융합경영학과(인문)', 0, 0),

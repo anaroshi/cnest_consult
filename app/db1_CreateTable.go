@@ -5,7 +5,7 @@ import (
 	"database/sql"
 )
 
-func dbForData(db *sql.DB) {
+func db1_CreateTable(db *sql.DB) {
 			
 	statement, err := db.Prepare(
 		`CREATE TABLE IF NOT EXISTS apply_subject (
