@@ -14,10 +14,10 @@ func dbForData(db *sql.DB) {
 			apSubjectName VARCHAR(32) NOT NULL,
 			sort integer,
 			flag integer,
-			inuser VARCHAR(24),
+			inUser VARCHAR(24),
 			inDate TIMESTAMP,
 			reUser VARCHAR(24),
-			reDate TIMESTAMP,
+			reDate TIMESTAMP
 		);`)
 
 	utils.HandleErr(err, "create table1")
@@ -28,7 +28,7 @@ func dbForData(db *sql.DB) {
 		`CREATE TABLE apply_line (
 			id SERIAL PRIMARY KEY,
 			lineId varchar(16) NOT NULL,
-			lineName varchar(32) NOT NULL,
+			lineName varchar(32) NOT NULL
 		);`)
 	utils.HandleErr(err, "create table2")
 	_, err = statement.Exec()
@@ -38,7 +38,7 @@ func dbForData(db *sql.DB) {
 		`CREATE TABLE apply_form (
 			id SERIAL PRIMARY KEY,
 			formId varchar(16) NOT NULL,
-			formName varchar(32) NOT NULL,
+			formName varchar(32) NOT NULL
 		);`)
 	utils.HandleErr(err, "create table3")
 	_, err = statement.Exec()
@@ -51,10 +51,10 @@ func dbForData(db *sql.DB) {
 			deptName varchar(32) NOT NULL,
 			sort integer,
 			flag integer,
-			inuser varchar(24),
+			inUser varchar(24),
 			inDate TIMESTAMP,
 			reUser varchar(24),
-			reDate TIMESTAMP,
+			reDate TIMESTAMP
 		);`)
 	utils.HandleErr(err, "create table4")
 	_, err = statement.Exec()
