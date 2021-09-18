@@ -33,9 +33,9 @@ func init() {
 	defer db.Close()
 	
 	// db1_DropTable(db)
-	// db1_CreateTable(db)
-	// db1_InsertData(db)
-	db2_InsertData_first1(db)
+	 db3_CreateTable(db)
+	 db3_InsertData(db)
+	//db2_InsertData_first1(db)
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
 	ApplySubjectOptionList(db)
