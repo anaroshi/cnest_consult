@@ -2,13 +2,11 @@ package app
 
 import (
 	"cnest_consult/univ/utils"
-	"net/http"
+	"database/sql"
 )
 
-func dbForData(w http.ResponseWriter, r *http.Request) {
-	db = connDB()
-	defer db.Close()
-		
+func dbForData(db *sql.DB) {
+			
 	statement, err := db.Prepare(
 		`CREATE TABLE IF NOT EXISTS apply_subject (
 			id SERIAL PRIMARY KEY,

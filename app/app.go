@@ -31,7 +31,8 @@ func init() {
 
 	db = connDB()
 	defer db.Close()
-
+	
+	dbForData(db)
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
 	ApplySubjectOptionList(db)
