@@ -135,9 +135,11 @@ if r.Method == http.MethodPost {
 
 //DB connection
 func connDB() *sql.DB {
+	// mysql
 	// connStr := "b89b28c48a88d0:21d95440@tcp(us-cdbr-east-04.cleardb.com:3306)/heroku_d92ae08e43b556b"	// mysql
 	// db, err := sql.Open("mysql", connStr)
 	
+	// postgres
 	connStr := os.Getenv("DATABASE_URL") // postgres
 	db, err := sql.Open("postgres", connStr)
 	
@@ -165,6 +167,7 @@ func MakeHandler() http.Handler {
 	mux.HandleFunc("/univDetail", univDetail)	
 	mux.HandleFunc("/chart", getChart)
 	mux.HandleFunc("/printUnivInfo", printUnivInfo)
+	mux.HandleFunc("/dbForData", dbForData )
 	mux.Handle("/favicon.ico", http.NotFoundHandler())
 	mux.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("./public/"))))
 	return mux
