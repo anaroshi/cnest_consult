@@ -32,7 +32,7 @@ func init() {
 	db = connDB()
 	defer db.Close()
 	
-	// db1_DropTable(db)
+	 db3_DropTable(db)
 	 db3_CreateTable(db)
 	 db3_InsertData(db)
 	//db2_InsertData_first1(db)

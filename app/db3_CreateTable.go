@@ -22,7 +22,7 @@ func db3_CreateTable(db *sql.DB) {
 			website varchar(32),
 			remark varchar(128),
 			inUser varchar(24),
-			inDate datetime,
+			inDate TIMESTAMP,
 			reUser varchar(24),
 			reDate TIMESTAMP
 		);`)

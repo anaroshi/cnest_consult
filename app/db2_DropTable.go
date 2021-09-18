@@ -5,7 +5,7 @@ import (
 	"database/sql"
 )
 
-func dbDropTable(db *sql.DB) {
+func db2_DropTable(db *sql.DB) {
 			
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS univ_susi_info_fst;`)
 
