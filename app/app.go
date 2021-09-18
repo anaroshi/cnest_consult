@@ -32,7 +32,7 @@ func init() {
 	db = connDB()
 	defer db.Close()
 	
-	dbForData(db)
+	dbForDataUnvi(db)
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
 	ApplySubjectOptionList(db)
