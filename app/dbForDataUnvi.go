@@ -73,7 +73,7 @@ func dbForDataUnvi(db *sql.DB) {
 	statement, err = db.Prepare(
 		`CREATE TABLE univ_susi_info_2020 (
 			id SERIAL PRIMARY KEY,
-			suin_cd varchar(16) FNOT NULL,
+			suin_cd varchar(16) NOT NULL,
 			recruit_volume_2020 float,
 			compete_ratio_2020 varchar(16),
 			recruit_replace_2020 integer,
