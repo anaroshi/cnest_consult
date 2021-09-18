@@ -108,7 +108,7 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// ----------- 조건에 부합하는 대학들
-	qry := `SELECT B.@ROWNUM := B.@ROWNUM + 1 AS no, A.id, A.univName, A.apply_formName, A.apply_dept_id, A.apply_line_id, 
+	qry := `SELECT count(*) OVER (ORDER BY A.id ) no, A.id, A.univName, A.apply_formName, A.apply_dept_id, A.apply_line_id, 
 	A.recruit_volume, A.recruitName, A.recruit1st, A.recruit1stVol, A.recruitfinal, A.sulimitName  FROM
 	( SELECT u1.id, u2.univName, u1.apply_formName, u1.apply_dept_id, u1.apply_line_id, u1.recruit_volume, 
 	u3.recruitName, u3.recruit1st, u3.recruit1stVol, u3.recruitfinal, u4.sulimitName 
@@ -117,8 +117,7 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	INNER JOIN recruit_method u3 ON u1.recruit_met_id=u3.recruitId 
 	INNER JOIN recruit_sununglimit u4 ON u1.recruit_su_lim_id = u4.sulimitId
 	INNER JOIN univ_susi_info_2021 u5 ON u1.suin_cd=u5.suin_cd
-	WHERE ` + qryStr + `ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id ) A, 
-	(SELECT @ROWNUM := 0 ) B`
+	WHERE ` + qryStr + `ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id ) A`
 	fmt.Println("qry :",qry )
 	rows, err := db.Query(qry)
 	utils.HandleError(w, err, "dbselect")
@@ -141,13 +140,12 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 
 	// Chart Data	
 	qry = `
-		SELECT @ROWNUM := @ROWNUM + 1 AS no, A.subjNm, A.nasinMean FROM
+		SELECT count(*) OVER (ORDER BY A.id ) no, A.subjNm, A.nasinMean FROM
 		( SELECT CONCAT(u2.univName, '-', u1.apply_dept_id) subjNm, u5.nasin_mean_2021 nasinMean
 		FROM univ_susi_info_fst u1 
 		INNER JOIN univ_info u2 ON u1.univ_id = u2.univId 
 		INNER JOIN univ_susi_info_2021 u5 ON u1.suin_cd=u5.suin_cd
-		WHERE ` + qryStr + ` ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id) A, 
-		(SELECT @ROWNUM := 0 ) B`
+		WHERE ` + qryStr + ` ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id) A`
 
 		
 	fmt.Println("qry :",qry )
