@@ -108,30 +108,34 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// ----------- 조건에 부합하는 대학들
-	qry := `SELECT count(*) OVER (ORDER BY A.id ) no, A.id, A.univName, A.apply_formName, A.apply_dept_id, A.apply_line_id, 
-	A.recruit_volume, A.recruitName, A.recruit1st, A.recruit1stVol, A.recruitfinal, A.sulimitName  FROM
-	( SELECT u1.id, u2.univName, u1.apply_formName, u1.apply_dept_id, u1.apply_line_id, u1.recruit_volume, 
-	u3.recruitName, u3.recruit1st, u3.recruit1stVol, u3.recruitfinal, u4.sulimitName 
-	FROM univ_susi_info_fst u1 
-	INNER JOIN univ_info u2 ON u1.univ_id = u2.univId 
-	INNER JOIN recruit_method u3 ON u1.recruit_met_id=u3.recruitId 
-	INNER JOIN recruit_sununglimit u4 ON u1.recruit_su_lim_id = u4.sulimitId
-	INNER JOIN univ_susi_info_2021 u5 ON u1.suin_cd=u5.suin_cd
-	WHERE ` + qryStr + `ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id ) A`
+	qry := `
+		SELECT A.id, A.univName, A.apply_formName, A.apply_dept_id, A.apply_line_id, 
+		A.recruit_volume, A.recruitName, A.recruit1st, A.recruit1stVol, A.recruitfinal, A.sulimitName  FROM
+		( SELECT u1.id, u2.univName, u1.apply_formName, u1.apply_dept_id, u1.apply_line_id, u1.recruit_volume, 
+		u3.recruitName, u3.recruit1st, u3.recruit1stVol, u3.recruitfinal, u4.sulimitName 
+		FROM univ_susi_info_fst u1 
+		INNER JOIN univ_info u2 ON u1.univ_id = u2.univId 
+		INNER JOIN recruit_method u3 ON u1.recruit_met_id=u3.recruitId 
+		INNER JOIN recruit_sununglimit u4 ON u1.recruit_su_lim_id = u4.sulimitId
+		INNER JOIN univ_susi_info_2021 u5 ON u1.suin_cd=u5.suin_cd
+		WHERE ` + qryStr + `ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id ) A
+	`
 	fmt.Println("qry :",qry )
 	rows, err := db.Query(qry)
 	utils.HandleError(w, err, "dbselect")
 
 	var s univ
-	
+	var z int = 1
 	for rows.Next() {
 			
 		err = rows.Scan(
-			&s.No, &s.Id, &s.UnivName, &s.Apply_formName, &s.Apply_dept_id, &s.Apply_line_id, &s.Recruit_volume, &s.RecruitName, 
+			&s.Id, &s.UnivName, &s.Apply_formName, &s.Apply_dept_id, &s.Apply_line_id, &s.Recruit_volume, &s.RecruitName, 
 			&s.Recruit1st, &s.Recruit1stVol, &s.RecruitFinal, &s.SulimitName,
 		)
 		utils.HandleError(w, err, "loadValue")
-		univs = append(univs, s)	
+		s.No = z
+		univs = append(univs, s)
+		z++	
 	}	
 	data := applyData1 { UnivInfo: univs, ApplyDept: applyDeptLists, }	
 	//fmt.Println(data)
@@ -140,13 +144,13 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 
 	// Chart Data	
 	qry = `
-		SELECT count(*) OVER (ORDER BY A.id ) no, A.subjNm, A.nasinMean FROM
+		SELECT A.subjNm, A.nasinMean FROM
 		( SELECT CONCAT(u2.univName, '-', u1.apply_dept_id) subjNm, u5.nasin_mean_2021 nasinMean
 		FROM univ_susi_info_fst u1 
 		INNER JOIN univ_info u2 ON u1.univ_id = u2.univId 
 		INNER JOIN univ_susi_info_2021 u5 ON u1.suin_cd=u5.suin_cd
-		WHERE ` + qryStr + ` ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id) A`
-
+		WHERE ` + qryStr + ` ORDER BY u2.univName, u1.apply_formName, u1.apply_dept_id) A
+	`
 		
 	fmt.Println("qry :",qry )
 
@@ -161,16 +165,18 @@ func indexPuniv(w http.ResponseWriter, r *http.Request) {
 		StdValue []float32
 	)
 
+	var y int = 1
 	for rows.Next() {
 			
 		err = rows.Scan(
-			&sd.Sq, &sd.UnivDeptNm, &sd.Nasin_mean_2021,
+			&sd.UnivDeptNm, &sd.Nasin_mean_2021,
 		)
 		utils.HandleError(w, err, "load ChartValue")
-		No = append(No, sd.Sq)
+		No = append(No, fmt.Sprint(y))
 		SubjNm = append(SubjNm, sd.UnivDeptNm)
 		AvgValue = append(AvgValue, sd.Nasin_mean_2021)
 		StdValue = append(StdValue, float32(myValueFlt))
+		y++
 	}	
 	
 	// No   		= []int{1,2,3,4,5,6,7,8,9}
