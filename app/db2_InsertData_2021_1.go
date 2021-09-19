@@ -5,7 +5,7 @@ import (
 	"database/sql"
 )
 
-func db2_InsertData_2021(db *sql.DB) {
+func db2_InsertData_2021_1(db *sql.DB) {
 
 	stmt, err := db.Prepare(
 		`INSERT INTO univ_susi_info_2021 (id, suin_cd, recruit_volume_2021, compete_ratio_2021, recruit_replace_2021, nasin_best_2021, nasin_mean_2021, nasin_limit_2021, recruit_factor_mean_2021, inDate) VALUES
