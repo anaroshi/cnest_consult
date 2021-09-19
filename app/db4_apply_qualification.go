@@ -18,7 +18,7 @@ func db4_apply_qualification(db *sql.DB) {
 	// Create table
 	statement, err = db.Prepare(
 		`CREATE TABLE apply_qualification (
-				id int NOT NULL,
+				id SERIAL PRIMARY KEY,
 				qualiId varchar(16) NOT NULL,
 				qualiName varchar(500) NOT NULL,
 				sort integer,
