@@ -117,7 +117,7 @@ func univDetail(w http.ResponseWriter, r *http.Request) {
 	LEFT JOIN etc_method u11 ON u1.etc_met_id = u11.etcmetId
 	LEFT JOIN document_list u12 ON u1.docu_list_id = u12.doclstId
 	LEFT JOIN autowriting u13 ON u1.auto_writing_id = u13.atwrtId
-	WHERE u1.id=?
+	WHERE u1.id=$1
 	`
 	rows, err := db.Query(qry,id)
 	utils.HandleError(w, err, "dbselect")
