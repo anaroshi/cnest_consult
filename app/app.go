@@ -46,8 +46,8 @@ func init() {
 
 	// db2_InsertData_2021_1(db)
 	// db2_InsertData_2021_2(db)
-	db2_InsertData_2020(db)
-	// db2_InsertData_2019(db)
+	// db2_InsertData_2020(db)
+	db2_InsertData_2019(db)
 
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
