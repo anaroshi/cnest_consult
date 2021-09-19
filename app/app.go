@@ -40,6 +40,7 @@ func init() {
 	// db4_interview_method(db)
 	// db4_nasin_method(db)
 	// db4_nonsul_method(db)
+	db2_InsertData_first3(db)
 
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
