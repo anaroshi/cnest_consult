@@ -1015,7 +1015,8 @@ func db2_InsertData_2021_2(db *sql.DB) {
 	utils.HandleErr(err, "insert data1 exec")
 
 	stmt, err = db.Prepare(`
-(3001, 'univ_177_007', 29, '10.24:1', 36, 0, 2.06, 0, 0, '2021-08-25 08:18:50'),
+	INSERT INTO univ_susi_info_2021 (id, suin_cd, recruit_volume_2021, compete_ratio_2021, recruit_replace_2021, nasin_best_2021, nasin_mean_2021, nasin_limit_2021, recruit_factor_mean_2021, inDate) VALUES
+		(3001, 'univ_177_007', 29, '10.24:1', 36, 0, 2.06, 0, 0, '2021-08-25 08:18:50'),
 (3002, 'univ_177_008', 9, '13.67:1', 9, 0, 2.37, 0, 0, '2021-08-25 08:18:50'),
 (3003, 'univ_177_009', 9, '11.44:1', 17, 0, 1.69, 0, 0, '2021-08-25 08:18:50'),
 (3004, 'univ_177_010', 9, '10.56:1', 9, 0, 2.31, 0, 0, '2021-08-25 08:18:50'),
@@ -2020,7 +2021,8 @@ _, err = stmt.Exec()
 utils.HandleErr(err, "insert data2 exec")
 
 stmt, err = db.Prepare(`
-(4001, 'univ_159_065', 8, '7.25:1', 18, 0, 2.54, 2.61, 0, '2021-08-25 08:18:52'),
+INSERT INTO univ_susi_info_2021 (id, suin_cd, recruit_volume_2021, compete_ratio_2021, recruit_replace_2021, nasin_best_2021, nasin_mean_2021, nasin_limit_2021, recruit_factor_mean_2021, inDate) VALUES
+		(4001, 'univ_159_065', 8, '7.25:1', 18, 0, 2.54, 2.61, 0, '2021-08-25 08:18:52'),
 (4002, 'univ_159_066', 8, '8.13:1', 22, 0, 2.54, 2.72, 0, '2021-08-25 08:18:52'),
 (4003, 'univ_159_067', 8, '5.25:1', 14, 0, 3.13, 3.35, 0, '2021-08-25 08:18:52'),
 (4004, 'univ_159_068', 8, '5.88:1', 18, 0, 2.77, 2.93, 0, '2021-08-25 08:18:52'),
@@ -3025,7 +3027,8 @@ _, err = stmt.Exec()
 utils.HandleErr(err, "insert data3 exec")
 
 stmt, err = db.Prepare(`
-(5001, 'univ_168_007', 16, '5.88:1', 17, 0, 3.75, 0, 0, '2021-08-25 08:18:54'),
+INSERT INTO univ_susi_info_2021 (id, suin_cd, recruit_volume_2021, compete_ratio_2021, recruit_replace_2021, nasin_best_2021, nasin_mean_2021, nasin_limit_2021, recruit_factor_mean_2021, inDate) VALUES
+		(5001, 'univ_168_007', 16, '5.88:1', 17, 0, 3.75, 0, 0, '2021-08-25 08:18:54'),
 (5002, 'univ_168_008', 21, '2.90:1', 12, 0, 4.48, 0, 0, '2021-08-25 08:18:54'),
 (5003, 'univ_168_009', 0, '0', 0, 0, 0, 0, 0, '2021-08-25 08:18:54'),
 (5004, 'univ_168_010', 15, '6.20:1', 8, 0, 4.07, 0, 0, '2021-08-25 08:18:54'),

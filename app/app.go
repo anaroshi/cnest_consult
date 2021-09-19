@@ -41,9 +41,11 @@ func init() {
 	// db4_nasin_method(db)
 	// db4_nonsul_method(db)
 	// db2_InsertData_first3(db)
-	db2_InsertData_second1(db)
-	db2_InsertData_second2(db)
-	// db2_InsertData_2021_2(db)
+	// db2_InsertData_second1(db)
+	// db2_InsertData_second2(db)
+
+	db2_InsertData_2021_1(db)
+	db2_InsertData_2021_2(db)
 	// db2_InsertData_2020(db)
 	// db2_InsertData_2019(db)
 
