@@ -6,8 +6,29 @@ import (
 )
 
 func db2_InsertData_second1(db *sql.DB) {
+	stmt, err := db.Prepare(`DROP TABLE IF EXISTS univ_susi_info_snd;`)
+	utils.HandleErr(err, "drop univ_susi_info_snd table")
+	_, err = stmt.Exec()
+	utils.HandleErr(err, "drop tuniv_susi_info_snd able exec")
+	
+	stmt, err = db.Prepare(
+		`CREATE TABLE univ_susi_info_snd (
+			id SERIAL PRIMARY KEY,
+			suin_cd varchar(16) NOT NULL,
+			remarks varchar(256) NOT NULL,
+			apply_datetime varchar(128),
+			apply_docu_datetime varchar(128),
+			recruit_select_date varchar(128),
+			recruit_test_date varchar(128),
+			recruit_pass_date varchar(128),
+			result_remarks varchar(256),
+			inDate TIMESTAMP
+		);`)
+	utils.HandleErr(err, "create univ_susi_info_snd table")
+	_, err = stmt.Exec()
+	utils.HandleErr(err, "create univ_susi_info_snd table exec")
 
-	stmt, err := db.Prepare(
+	stmt, err = db.Prepare(
 		`INSERT INTO univ_susi_info_snd (id, suin_cd, remarks, apply_datetime, apply_docu_datetime, recruit_select_date, recruit_test_date, recruit_pass_date, result_remarks, inDate) VALUES
 		(1, 'univ_109_001', '', '9.10.(금) ~ 9.14.(화) 17:00', '', '', '', '12.16.(목) 16:00', '', '2021-08-25 07:25:57'),
 		(2, 'univ_109_002', '', '9.10.(금) ~ 9.14.(화) 17:00', '', '', '', '12.16.(목) 16:00', '', '2021-08-25 07:25:57'),
