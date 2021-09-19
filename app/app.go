@@ -32,8 +32,7 @@ func init() {
 	db = connDB()
 	defer db.Close()
 	
-	db2_DropCreateTable(db)
-	db2_InsertData_second1(db)
+	db4_apply_qualification(db)
 	
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
