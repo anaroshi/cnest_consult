@@ -1015,6 +1015,7 @@ func db2_InsertData_second2(db *sql.DB) {
 		utils.HandleErr(err, "nsert data1 exec")	
 	
 		stmt, err = db.Prepare(`
+		INSERT INTO univ_susi_info_snd (id, suin_cd, remarks, apply_datetime, apply_docu_datetime, recruit_select_date, recruit_test_date, recruit_pass_date, result_remarks, inDate) VALUES
 (3001, 'univ_177_007', '2022 교과우수자전형 개명', '9.10.(금) ~ 9.14.(화) 18:00', '', '', '', '12.16.(목)', '', '2021-08-25 07:26:01'),
 (3002, 'univ_177_008', '2022 교과우수자전형 개명', '9.10.(금) ~ 9.14.(화) 18:00', '', '', '', '12.16.(목)', '', '2021-08-25 07:26:01'),
 (3003, 'univ_177_009', '2022 교과우수자전형 개명', '9.10.(금) ~ 9.14.(화) 18:00', '', '', '', '12.16.(목)', '', '2021-08-25 07:26:01'),
@@ -2021,6 +2022,7 @@ _, err = stmt.Exec()
 utils.HandleErr(err, "nsert data2 exec")
 	
 		stmt, err = db.Prepare(`
+		INSERT INTO univ_susi_info_snd (id, suin_cd, remarks, apply_datetime, apply_docu_datetime, recruit_select_date, recruit_test_date, recruit_pass_date, result_remarks, inDate) VALUES		
 (4001, 'univ_159_065', '2022 교과성적우수자 전형 분리선발', '9.10.(금) ~ 9.14.(화) 18:00', '', '', '', '12.16.(목)', '70%컷', '2021-08-25 07:26:03'),
 (4002, 'univ_159_066', '2022 교과성적우수자 전형 분리선발', '9.10.(금) ~ 9.14.(화) 18:00', '', '', '', '12.16.(목)', '70%컷', '2021-08-25 07:26:03'),
 (4003, 'univ_159_067', '2022 교과성적우수자 전형 분리선발', '9.10.(금) ~ 9.14.(화) 18:00', '', '', '', '12.16.(목)', '70%컷', '2021-08-25 07:26:03'),
@@ -3027,6 +3029,7 @@ _, err = stmt.Exec()
 utils.HandleErr(err, "nsert data3 exec")
 
 		stmt, err = db.Prepare(`
+		INSERT INTO univ_susi_info_snd (id, suin_cd, remarks, apply_datetime, apply_docu_datetime, recruit_select_date, recruit_test_date, recruit_pass_date, result_remarks, inDate) VALUES		
 (5001, 'univ_168_007', '', '9.10.(금) ~ 9.14.(화) 19:00', '', '11.03.(수) (예정)', '(면접)11.06.(토)', '11.19.(금) (예정)', '', '2021-08-25 07:26:05'),
 (5002, 'univ_168_008', '', '9.10.(금) ~ 9.14.(화) 19:00', '', '11.03.(수) (예정)', '(면접)11.06.(토)', '11.19.(금) (예정)', '', '2021-08-25 07:26:05'),
 (5003, 'univ_168_009', '', '9.10.(금) ~ 9.14.(화) 19:00', '', '11.03.(수) (예정)', '(면접)11.06.(토)', '11.19.(금) (예정)', '', '2021-08-25 07:26:05'),
