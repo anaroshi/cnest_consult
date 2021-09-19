@@ -70,7 +70,7 @@ func univInfo1(info1 detailUniv1, id string) detailUniv1 {
 		LEFT JOIN etc_method u11 ON u1.etc_met_id = u11.etcmetId
 		LEFT JOIN document_list u12 ON u1.docu_list_id = u12.doclstId
 		LEFT JOIN autowriting u13 ON u1.auto_writing_id = u13.atwrtId
-		WHERE u1.id=? `
+		WHERE u1.id=$1 `
 
 	rows, err := db.Query(qry, id)
 	utils.HandleErr(err, "printUnivInfo_dbselect")
@@ -110,7 +110,7 @@ func univInfo1(info1 detailUniv1, id string) detailUniv1 {
 // 대학정보2 Info
 func univInfo2(info2 detailUniv2, suin_cd string) detailUniv2 {
 	qry := `SELECT remarks, apply_datetime, apply_docu_datetime, recruit_select_date, recruit_test_date, 
-	recruit_pass_date, result_remarks FROM univ_susi_info_snd WHERE suin_cd = ?`
+	recruit_pass_date, result_remarks FROM univ_susi_info_snd WHERE suin_cd = $1`
 	rows, err := db.Query(qry, suin_cd)
 	utils.HandleErr(err, "dbselect2")
 	defer rows.Close()
@@ -130,7 +130,7 @@ func univInfo2(info2 detailUniv2, suin_cd string) detailUniv2 {
 func n21Info(n21 value2021, suin_cd string) value2021 {
 	
 	qry := `SELECT recruit_volume_2021, compete_ratio_2021, recruit_replace_2021, nasin_best_2021, nasin_mean_2021, 
-	nasin_limit_2021, recruit_factor_mean_2021 FROM univ_susi_info_2021 WHERE suin_cd = ?`
+	nasin_limit_2021, recruit_factor_mean_2021 FROM univ_susi_info_2021 WHERE suin_cd = $1`
 	rows, err := db.Query(qry, suin_cd)
 	utils.HandleErr(err, "dbselect3")
 	defer rows.Close()
@@ -150,7 +150,7 @@ func n21Info(n21 value2021, suin_cd string) value2021 {
 func n20Info(n20 value2020, suin_cd string) value2020 {
 	
 	qry := `SELECT recruit_volume_2020, compete_ratio_2020, recruit_replace_2020, nasin_best_2020, nasin_mean_2020, 
-	nasin_limit_2020, recruit_factor_mean_2020 FROM univ_susi_info_2020 WHERE suin_cd = ?`
+	nasin_limit_2020, recruit_factor_mean_2020 FROM univ_susi_info_2020 WHERE suin_cd = $1`
 	rows, err := db.Query(qry, suin_cd)
 	utils.HandleErr(err, "dbselect3")
 	defer rows.Close()
@@ -170,7 +170,7 @@ func n20Info(n20 value2020, suin_cd string) value2020 {
 func n19Info(n19 value2019, suin_cd string) value2019 {
 	
 	qry := `SELECT recruit_volume_2019, compete_ratio_2019, recruit_replace_2019, nasin_best_2019, nasin_mean_2019, 
-	nasin_limit_2019, recruit_factor_mean_2019 FROM univ_susi_info_2019 WHERE suin_cd = ?`
+	nasin_limit_2019, recruit_factor_mean_2019 FROM univ_susi_info_2019 WHERE suin_cd = $1`
 	rows, err := db.Query(qry, suin_cd)
 	utils.HandleErr(err, "dbselect3")
 	defer rows.Close()
