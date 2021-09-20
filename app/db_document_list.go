@@ -5,14 +5,14 @@ import (
 	"database/sql"
 )
 
-func db4_document_list(db *sql.DB) {
+func db_document_list(db *sql.DB) {
 
 	// Drop table
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS document_list;`)
 
-	utils.HandleErr(err, "drop table1")
+	utils.HandleErr(err, "Drop document_list table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "drop table11 exec")
+	utils.HandleErr(err, "Exec for Drop document_list table")
 
 
 	// Create table
@@ -29,9 +29,9 @@ func db4_document_list(db *sql.DB) {
 			reDate TIMESTAMP
 		);`)
 
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Create document_list table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Create document_list table")
 
 
 	// Insert Data
@@ -56,7 +56,7 @@ func db4_document_list(db *sql.DB) {
 		(16, 'dcli_1016', '학교생활기록부, 학교장 추천 명단', 0, 0),
 		(17, 'dcli_1017', '학교생활기록부, 활동보고서 및 증빙서류', 0, 0)
 		;`)
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Insert Data into document_list table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Insert Data into document_list table")
 }

@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 
 	//_ "github.com/go-sql-driver/mysql"
@@ -31,23 +32,6 @@ func init() {
 
 	db = connDB()
 	defer db.Close()
-	
-	// db4_apply_qualification(db)
-	// db4_autowriting(db)
-	// db4_document_list(db)
-	// db4_document_method(db)
-	// db4_etc_method(db)
-	// db4_interview_method(db)
-	// db4_nasin_method(db)
-	// db4_nonsul_method(db)
-	// db2_InsertData_first3(db)
-	// db2_InsertData_second1(db)
-	// db2_InsertData_second2(db)
-
-	// db2_InsertData_2021_1(db)
-	// db2_InsertData_2021_2(db)
-	// db2_InsertData_2020(db)
-	db2_InsertData_2019(db)
 
 	ApplyFormOptionList(db)
 	ApplyLineOptionList(db)
@@ -183,7 +167,8 @@ func MakeHandler() http.Handler {
 	mux.HandleFunc("/indexPuniv", indexPuniv).Methods("POST")
 	mux.HandleFunc("/univDetail", univDetail)	
 	mux.HandleFunc("/chart", getChart)
-	mux.HandleFunc("/printUnivInfo", printUnivInfo)	
+	mux.HandleFunc("/printUnivInfo", printUnivInfo)
+	mux.HandleFunc("/excel", excelFileDownload)
 	mux.Handle("/favicon.ico", http.NotFoundHandler())
 	mux.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("./public/"))))
 	return mux
@@ -199,4 +184,13 @@ func (sao *searchApplyOption) getSrhOpt1(ao string) string {
 func (sao *searchApplyOption) getSrhOpt2(ao string) string {
 	sao.ApplyOptions2 = sao.ApplyOptions1 + "AND (" + ao + ") "
 	return sao.ApplyOptions2
+}
+
+// 선택한 대학 정보 excel file로 다운로드
+func excelFileDownload(w http.ResponseWriter, r *http.Request){
+	
+	filename := "./data/data-selectedUnvi.xlsx"
+	w.Header().Set("Content-Disposition", "attachment; filename="+strconv.Quote(filename))
+	w.Header().Set("Content-Type", "application/octet-stream")
+	http.ServeFile(w, r, filename)	
 }

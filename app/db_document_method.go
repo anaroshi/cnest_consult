@@ -5,14 +5,14 @@ import (
 	"database/sql"
 )
 
-func db4_document_method(db *sql.DB) {
+func db_document_method(db *sql.DB) {
 
 	// Drop table
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS document_method;`)
 
-	utils.HandleErr(err, "drop table1")
+	utils.HandleErr(err, "Drop document_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "drop table11 exec")
+	utils.HandleErr(err, "Exec for Drop document_method table")
 
 
 	// Create table
@@ -29,9 +29,9 @@ func db4_document_method(db *sql.DB) {
 			reDate TIMESTAMP
 		);`)
 
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Create document_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Create document_method table")
 
 
 	// Insert Data
@@ -126,7 +126,7 @@ func db4_document_method(db *sql.DB) {
 			(86, 'domt_1086', '학업태도와 의지(10) 학업성취수준(40) 인성(20) 성장가능성(30)', 0, 0),
 			(87, 'domt_1087', '해당없음', 0, 0)
 		;`)
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Insert Data into document_method table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Insert Data into document_method table")
 }

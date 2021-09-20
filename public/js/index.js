@@ -21,7 +21,7 @@ $(document).ready(function () {
       chk_val.push($(this).val());
     });
     //alert(chk_val);
-    if (isBlank(chk_val)) {
+    if (chk_val=="") {
       alert("지원대학을 선택하세요.");
     } else {
 
@@ -32,6 +32,7 @@ $(document).ready(function () {
         dataType: "html",
       })
       .done(async function (data) {
+        $(location).attr('href', '/excel');
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.log('서버오류: '+ textStatus);

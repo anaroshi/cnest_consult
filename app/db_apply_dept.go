@@ -5,72 +5,35 @@ import (
 	"database/sql"
 )
 
-func db1_InsertData(db *sql.DB) {
-
-	stmt, err := db.Prepare(
-		`INSERT INTO apply_line (
-			id, lineId, lineName
-			) VALUES 
-			(1, 'line_101', '인문'),
-			(2, 'line_102', '자연'),
-			(3, 'line_103', '공통'),
-			(4, 'line_104', '예체능');`)
-	utils.HandleErr(err, "create table1")
+func db_apply_dept(db *sql.DB) {
+	 
+	// Drop Table
+	stmt, err := db.Prepare(`DROP TABLE IF EXISTS apply_dept;`)
+	utils.HandleErr(err, "Drop apply_dept table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Drop apply_dept table")
 
+	// Create Table
 	stmt, err = db.Prepare(
-		`INSERT INTO apply_form (
-			id, formId, formName
-			) VALUES
-			(1, 'form_101', '학생부교과'),
-			(2, 'form_102', '학생부종합'),
-			(3, 'form_103', '논술'),
-			(4, 'form_104', '실기');`)
-	utils.HandleErr(err, "create table2")
+		`CREATE TABLE IF NOT EXISTS apply_dept (
+			id SERIAL PRIMARY KEY,
+			deptId varchar(16) NOT NULL,
+			deptName varchar(32) NOT NULL,
+			sort integer,
+			flag integer,
+			inUser VARCHAR(24),
+			inDate TIMESTAMP,
+			reUser VARCHAR(24),
+			reDate TIMESTAMP
+		);`)
+
+	utils.HandleErr(err, "Create apply_dept table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table12 exec")
+	utils.HandleErr(err, "Exec for Create apply_dept table")
 
-	stmt, err = db.Prepare(
-		`INSERT INTO apply_subject (id, apSubjectId, apSubjectName, sort, flag) VALUES
-		(1, 'subj_1001', '간호', 0, 0),
-		(2, 'subj_1002', '건축공', 0, 0),
-		(3, 'subj_1003', '게임', 0, 0),
-		(4, 'subj_1004', '공학기타', 0, 0),
-		(5, 'subj_1005', '관광', 0, 0),
-		(6, 'subj_1006', '국방', 0, 0),
-		(7, 'subj_1007', '기계공', 0, 0),
-		(8, 'subj_1008', '농학', 0, 0),
-		(9, 'subj_1009', '디자인', 0, 0),
-		(10, 'subj_1010', '미디어', 0, 0),
-		(11, 'subj_1011', '미술', 0, 0),
-		(12, 'subj_1012', '법행정', 0, 0),
-		(13, 'subj_1013', '보건', 0, 0),
-		(14, 'subj_1014', '사범(인문)', 0, 0),
-		(15, 'subj_1015', '사범(자연)', 0, 0),
-		(16, 'subj_1016', '사회', 0, 0),
-		(17, 'subj_1017', '상경', 0, 0),
-		(18, 'subj_1018', '생활', 0, 0),
-		(19, 'subj_1019', '수의예', 0, 0),
-		(20, 'subj_1020', '약학', 0, 0),
-		(21, 'subj_1021', '어문', 0, 0),
-		(22, 'subj_1022', '영화연극', 0, 0),
-		(23, 'subj_1023', '예체능', 0, 0),
-		(24, 'subj_1024', '의치한', 0, 0),
-		(25, 'subj_1025', '이학', 0, 0),
-		(26, 'subj_1026', '인문', 0, 0),
-		(27, 'subj_1027', '자율전공', 0, 0),
-		(28, 'subj_1028', '전자공', 0, 0),
-		(29, 'subj_1029', '정보통신', 0, 0),
-		(30, 'subj_1030', '체육', 0, 0),
-		(31, 'subj_1031', '화생공', 0, 0),
-		(32, 'subj_1032', '사범(초등)', 0, 0);`)
-	utils.HandleErr(err, "create table3")
-	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table13 exec")
-
-	stmt, err = db.Prepare(
-		`INSERT INTO apply_dept (id, deptId, deptName, sort, flag) VALUES
+	//  Insert Data
+	stmt, err = db.Prepare(`
+		INSERT INTO apply_dept (id, deptId, deptName, sort, flag) VALUES
 		(1, 'dept_0001', 'AI디자인학과', 0, 0),
 		(2, 'dept_0002', 'AI로봇전공', 0, 0),
 		(3, 'dept_0003', 'AI빅데이터융합경영학과(인문)', 0, 0),
@@ -1120,8 +1083,10 @@ func db1_InsertData(db *sql.DB) {
 		(1047, 'dept_1047', '회계학과', 0, 0),
 		(1048, 'dept_1048', '회화과', 0, 0),
 		(1049, 'dept_1049', '휴먼기계바이오공학부', 0, 0),
-		(1050, 'dept_1050', '휴먼지능정보공학전공', 0, 0);`)
-	utils.HandleErr(err, "create table4")
+		(1050, 'dept_1050', '휴먼지능정보공학전공', 0, 0);
+	`)
+	
+	utils.HandleErr(err, "Insert Data into apply_dept table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table14 exec")
+	utils.HandleErr(err, "Exec for Insert Data into apply_dept table")
 }

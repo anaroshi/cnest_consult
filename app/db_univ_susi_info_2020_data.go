@@ -5,30 +5,10 @@ import (
 	"database/sql"
 )
 
-func db2_InsertData_2020(db *sql.DB) {
-	stmt, err := db.Prepare(`DROP TABLE IF EXISTS univ_susi_info_2020;`)
-	utils.HandleErr(err, "drop univ_susi_info_2020 table")
-	_, err = stmt.Exec()
-	utils.HandleErr(err, "drop univ_susi_info_2020 able exec")
+func db_univ_susi_info_2020_data(db *sql.DB) {
 	
-	stmt, err = db.Prepare(
-		`CREATE TABLE univ_susi_info_2020 (
-			id SERIAL PRIMARY KEY,
-			suin_cd varchar(16) NOT NULL,
-			recruit_volume_2020 float,
-			compete_ratio_2020 varchar(16),
-			recruit_replace_2020 integer,
-			nasin_best_2020 float,
-			nasin_mean_2020 float,
-			nasin_limit_2020 float,
-			recruit_factor_mean_2020 float,
-			inDate TIMESTAMP
-		);`)
-	utils.HandleErr(err, "create univ_susi_info_2020 table")
-	_, err = stmt.Exec()
-	utils.HandleErr(err, "create univ_susi_info_2020 table exec")
-
-	stmt, err = db.Prepare(	
+	// Insert Data
+	stmt, err := db.Prepare(	
 		`INSERT INTO univ_susi_info_2020 (id, suin_cd, recruit_volume_2020, compete_ratio_2020, recruit_replace_2020, nasin_best_2020, nasin_mean_2020, nasin_limit_2020, recruit_factor_mean_2020, inDate) VALUES		
 		(1, 'univ_109_001', 6, '6.2:1', 0, 0, 2.6, 2.8, 0, '2021-08-25 19:50:26'),
 		(2, 'univ_109_002', 6, '7.8:1', 0, 0, 2.8, 3.2, 0, '2021-08-25 19:50:26'),

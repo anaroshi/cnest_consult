@@ -5,14 +5,14 @@ import (
 	"database/sql"
 )
 
-func db4_nonsul_method(db *sql.DB) {
+func db_nonsul_method(db *sql.DB) {
 
 	// Drop table
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS nonsul_method;`)
 
-	utils.HandleErr(err, "drop table1")
+	utils.HandleErr(err, "Drop nonsul_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "drop table11 exec")
+	utils.HandleErr(err, "Exec for Drop nonsul_method table")
 
 
 	// Create table
@@ -29,9 +29,9 @@ func db4_nonsul_method(db *sql.DB) {
 			reDate TIMESTAMP
 		);`)
 
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Create nonsul_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Create nonsul_method table")
 
 
 	// Insert Data
@@ -114,7 +114,7 @@ func db4_nonsul_method(db *sql.DB) {
 			(74, 'nsmt_1074', '해당없음', 0, 0),
 			(75, 'nsmt_9999', '', 0, 0)
 		;`)
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Insert Data into nonsul_method table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Insert Data into nonsul_method table")
 }

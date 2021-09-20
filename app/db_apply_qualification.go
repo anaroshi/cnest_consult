@@ -5,15 +5,15 @@ import (
 	"database/sql"
 )
 
-func db4_apply_qualification(db *sql.DB) {
+func db_apply_qualification(db *sql.DB) {
 
 	// Drop table
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS apply_qualification;`)
 
-	utils.HandleErr(err, "drop table1")
+	utils.HandleErr(err, "Drop apply_qualification table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "drop table11 exec")
-
+	utils.HandleErr(err, "Exec for Drop apply_qualification table")
+	
 
 	// Create table
 	statement, err = db.Prepare(
@@ -29,9 +29,9 @@ func db4_apply_qualification(db *sql.DB) {
 				reDate TIMESTAMP
 		);`)
 
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Create apply_qualification table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Create apply_qualification table")
 
 
 	// Insert Data
@@ -180,7 +180,7 @@ func db4_apply_qualification(db *sql.DB) {
 		(140, 'qual_1140', '충북-충남-대전-세종 소재 고교 입학하여 전 교육과정을 이수한 졸업(예정)자', 0, 0),
 		(141, 'qual_1141', '충북-충남-대전-세종 소재 고교 전 교육과정을 이수한 졸업(예정)자', 0, 0)
 		;`)
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Insert Data into apply_qualification table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Insert Data into apply_qualification table")
 }

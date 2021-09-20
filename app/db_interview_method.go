@@ -5,14 +5,14 @@ import (
 	"database/sql"
 )
 
-func db4_interview_method(db *sql.DB) {
+func db_interview_method(db *sql.DB) {
 
 	// Drop table
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS interview_method;`)
 
-	utils.HandleErr(err, "drop table1")
+	utils.HandleErr(err, "Drop interview_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "drop table11 exec")
+	utils.HandleErr(err, "Exec for Drop interview_method table")
 
 
 	// Create table
@@ -29,9 +29,9 @@ func db4_interview_method(db *sql.DB) {
 			reDate TIMESTAMP
 		);`)
 
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Create interview_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Create interview_method table")
 
 
 	// Insert Data
@@ -142,7 +142,7 @@ func db4_interview_method(db *sql.DB) {
 			(102, 'inmt_1102', '해당없음', 0, 0),
 			(103, 'inmt_9999', '', 0, 0)
 		;`)
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Insert Data into interview_method table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Insert Data into interview_method table")
 }

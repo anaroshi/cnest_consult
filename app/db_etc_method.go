@@ -5,14 +5,14 @@ import (
 	"database/sql"
 )
 
-func db4_etc_method(db *sql.DB) {
+func db_etc_method(db *sql.DB) {
 
 	// Drop table
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS etc_method;`)
 
-	utils.HandleErr(err, "drop table1")
+	utils.HandleErr(err, "Drop etc_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "drop table11 exec")
+	utils.HandleErr(err, "Exec for Drop etc_method table")
 
 
 	// Create table
@@ -29,9 +29,9 @@ func db4_etc_method(db *sql.DB) {
 			reDate TIMESTAMP
 		);`)
 
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Create etc_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Create etc_method table")
 
 
 	// Insert Data
@@ -73,7 +73,7 @@ func db4_etc_method(db *sql.DB) {
 			(33, 'etmt_1033', '활동자료실적물 A4 20매이내', 0, 0),
 			(34, 'etmt_9999', '', 0, 0)
 		;`)
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Insert Data into etc_method table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Insert Data into etc_method table")
 }

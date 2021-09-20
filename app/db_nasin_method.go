@@ -5,14 +5,14 @@ import (
 	"database/sql"
 )
 
-func db4_nasin_method(db *sql.DB) {
+func db_nasin_method(db *sql.DB) {
 
 	// Drop table
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS nasin_method;`)
 
-	utils.HandleErr(err, "drop table1")
+	utils.HandleErr(err, "Drop nasin_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "drop table11 exec")
+	utils.HandleErr(err, "Exec for Drop nasin_method table")
 
 
 	// Create table
@@ -29,9 +29,9 @@ func db4_nasin_method(db *sql.DB) {
 			reDate TIMESTAMP
 		);`)
 
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Create nasin_method table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Create nasin_method table")
 
 
 	// Insert Data
@@ -195,7 +195,7 @@ func db4_nasin_method(db *sql.DB) {
 			(155, 'namt_1155', '해당없음', 0, 0),
 			(156, 'namt_9999', '', 0, 0)
 		;`)
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Insert Data into nasin_method table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Insert Data into nasin_method table")
 }

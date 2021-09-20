@@ -5,14 +5,14 @@ import (
 	"database/sql"
 )
 
-func db4_autowriting(db *sql.DB) {
+func db_autowriting(db *sql.DB) {
 
 	// Drop table
 	statement, err := db.Prepare(`DROP TABLE IF EXISTS autowriting;`)
 
-	utils.HandleErr(err, "drop table1")
+	utils.HandleErr(err, "Drop autowriting table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "drop table11 exec")
+	utils.HandleErr(err, "Exec for Drop autowriting table")
 
 
 	// Create table
@@ -29,9 +29,9 @@ func db4_autowriting(db *sql.DB) {
 			reDate TIMESTAMP
 		);`)
 
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Create atwrtName table")
 	_, err = statement.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Create atwrtName table")
 
 
 	// Insert Data
@@ -58,7 +58,7 @@ func db4_autowriting(db *sql.DB) {
 			(18, 'atwr_1018', '최근 3년 가장 큰 영향 준 책 2권, 각 도서별 400자', 0, 0),
 			(19, 'atwr_1019', '특이 항목', 0, 0)
 		;`)
-	utils.HandleErr(err, "create table1")
+	utils.HandleErr(err, "Insert Data into autowriting table")
 	_, err = stmt.Exec()
-	utils.HandleErr(err, "create table11 exec")
+	utils.HandleErr(err, "Exec for Insert Data into autowriting table")
 }
