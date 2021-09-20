@@ -32,7 +32,7 @@ $(document).ready(function () {
         dataType: "html",
       })
       .done(async function (data) {
-        $(location).attr('href', '/excel');
+        $(location).attr("href", "/excel");
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.log('서버오류: '+ textStatus);
